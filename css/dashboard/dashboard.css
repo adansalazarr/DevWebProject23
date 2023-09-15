@@ -1,0 +1,58 @@
+body {
+	min-height: 100vh;
+}
+
+.contenedor {
+	display: flex;
+	flex-direction: column;
+	justify-content: start;
+	align-items: stretch;
+	min-height: calc(100vh - 110px);
+	padding-top: 110px;
+	color: var(--color-medio-oscuro);
+	background-color: var(--color-medio-oscuro);
+}
+
+.panel-dashboard {
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	flex-grow: 1;
+
+	margin: 20px 40px;
+	padding: 40px 80px;
+	width: auto;
+
+	line-height: 1.5;
+	background-color: white;
+	border-radius: 8px;
+}
+
+.panel-dashboard table {
+	width: 100%;
+	border-spacing: 0;
+	border: 1px solid var(--color-oscuro);
+
+}
+
+.panel-dashboard tr td, .panel-dashboard tr th {
+	padding: 6px;
+	border-right: 1px solid var(--color-oscuro);
+	border-bottom: 1px solid var(--color-oscuro);
+}
+
+.panel-dashboard tr th:last-child, .panel-dashboard tr td:last-child {
+	border-right: none;
+}
+
+.panel-dashboard tr:last-child th, .panel-dashboard tr:last-child td {
+	border-bottom: none;
+}
+
+.panel-dashboard table button {
+	margin: 2px 10px;
+}
+
+.tabla-subfila {
+	background-color: var(--color-claro);
+}

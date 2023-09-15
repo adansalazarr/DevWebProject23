@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+	<head>
+		<meta charset=UTF-8>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>BeHappy | Dashboard Administrador</title>
+
+		<!--Configuraciones del Favicon-->
+		<link rel="apple-touch-icon" sizes="180x180" href="../favicon/apple-touch-icon.png">
+		<link rel="icon" type="image/png" sizes="32x32" href="../favicon/favicon-32x32.png">
+		<link rel="icon" type="image/png" sizes="16x16" href="../favicon/favicon-16x16.png">
+		<link rel="manifest" href="../favicon/site.webmanifest">
+		<link rel="mask-icon" href="../favicon/safari-pinned-tab.svg" color="#5bbad5">
+		<meta name="msapplication-TileColor" content="#da532c">
+		<meta name="theme-color" content="#ffffff">
+
+		<!--Archivos de estilos CSS-->
+		<link rel="stylesheet" type="text/css" href="../css/styles.css">
+		<link rel="stylesheet" type="text/css" href="../css/dashboard/dashboard.css">
+	</head>
+	<body>
+
+		<nav>
+			<ul>
+				<li><a href="../index.html">BeHappy</a></li>
+				<li><a href="dashboard.html">Frases</a></li>
+				<li><a href="preguntas.html">Preguntas</a></li>
+			</ul>
+			<div>
+				<button type="button" onclick="cerrarSesion()">Cerrar sesión</button>
+				<span id="sesionCorreo"></span>
+			</div>
+		</nav>
+
+		<div class="contenedor">
+			
+			<div class="panel-dashboard">
+				<h1>Administrar Preguntas</h1>
+				<p>Administra las preguntas que se le presentarán al alumno cuando solicite hacer un cuestionario sobre su estado emocional.</p>
+				<p>Recuerda que estas preguntas se evaluarán con las siguientes opciones como respuestas:</p>
+
+				<ul>
+					<li>Raremente o niguna vez</li>
+					<li>Alguna o pocas veces</li>
+					<li>Ocasionalmente o buena parte del tiempo</li>
+					<li>La mayor parte o todo el tiempo</li>
+				</ul>
+
+				<p><button type="button">Agregar nueva pregunta</button></p>
+
+				<table id="tablaPreguntas">
+				</table>
+			</div>
+			
+		</div>
+
+		<script type="text/javascript" src="../js/dashboard/preguntas.js"></script>
+	</body>
+</html>

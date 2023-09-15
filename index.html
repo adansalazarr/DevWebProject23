@@ -1,21 +1,37 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es-MX">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
-    <title>Landing Page</title>
+    <title>BeHappy | Inicio</title>
+
+    <!--Configuraciones del Favicon-->
+    <link rel="apple-touch-icon" sizes="180x180" href="./favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="./favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./favicon/favicon-16x16.png">
+    <link rel="manifest" href="./favicon/site.webmanifest">
+    <link rel="mask-icon" href="./favicon/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+
+    <!--Archivos de estilos CSS-->
+    <link rel="stylesheet" type="text/css" href="./css/styles.css">
+    <link rel="stylesheet" type="text/css" href="./css/inicio.css">
 </head>
 <body>
+    <nav>
+        <ul>
+            <li><a href="./index.html">BeHappy</a></li>
+            <li><a href="./formulario.html">Evaluarme</a></li>
+            <li><a href="tel:8001234567">Contacto profesional</a></li>
+        </ul>
+        <a href="./dashboard/index.html" class="boton">Iniciar sesión</a>
+    </nav>
+
     <section class="section-1">
         <div class="overlay">
             <h1 id="motivational-text">Texto motivacional cambiante</h1>
         </div>
-    </section>
-    
-    <section class="section-2">
-        <button id="start-form-button">Hacer formulario</button>
-        <div id="question-container"></div>
     </section>
     
     <section class="section-3">
@@ -30,14 +46,18 @@
     </section>
     
     <section class="section-4">
-        <h2>Síguenos en las redes sociales</h2>
+        <h2>Comunicate con los profesionales</h2>
         <div class="social-buttons">
-            <a href="#">Facebook</a>
-            <a href="#">Instagram</a>
-            <a href="#">Teléfono</a>
+            <a href="tel:8001234567" class="boton">TQueremos</a>
         </div>
+        <!--<h2>Síguenos en las redes sociales</h2>
+        <div class="social-buttons">
+            <a href="#" class="boton">Facebook</a>
+            <a href="#" class="boton">Instagram</a>
+            <a href="#" class="boton">Teléfono</a>
+        </div>-->
     </section>
     
-    <script src="script.js"></script>
+    <script type="text/javascript" src="./js/script.js"></script>
 </body>
 </html>

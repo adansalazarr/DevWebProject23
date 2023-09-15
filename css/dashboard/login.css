@@ -1,0 +1,52 @@
+body {
+	min-height: 100vh;
+}
+
+.contenedor {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	min-height: calc(100vh - 110px);
+	padding-top: 110px;
+	color: var(--color-medio-oscuro);
+	background-color: var(--color-medio-oscuro);
+}
+
+.panel {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+
+	min-width: 350px;
+	width: 350px;
+	padding: 40px 80px;
+
+	background-color: white;
+	border-radius: 8px;
+}
+
+h1 {
+	margin-bottom: 30px;
+	text-align: center;
+	font-weight: 500;
+}
+
+label {
+	margin-bottom: 4px;
+}
+
+input {
+	margin-bottom: 20px;
+	padding: 12px 10px;
+	border: 1px solid var(--color-medio-oscuro);
+	border-radius: 2px;
+}
+
+.panel button {
+	height: 36px;
+	margin-top: 20px;
+	padding: 0 16px;
+
+	text-transform: uppercase;
+	color: white;
+}

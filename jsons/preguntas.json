@@ -1,0 +1,42 @@
+[
+	{
+		"id": 1,
+		"pregunta": "¿Te molestaron cosas que usualmente no te molestan?"
+	},
+	{
+		"id": 2,
+		"pregunta": "¿No te sentiste con ganas de comer?"
+	},
+	{
+		"id": 3,
+		"pregunta": "¿Sentías que no podías quitarte de encima la tristeza aún con la ayuda de tu familia o amigos?"
+	},
+	{
+		"id": 4,
+		"pregunta": "¿Sentías que eras tan buena/bueno como cualquier otra persona?"
+	},
+	{
+		"id": 5,
+		"pregunta": "¿Tenías dificultad en mantener tu mente en lo que estabas haciendo?"
+	},
+	{
+		"id": 6,
+		"pregunta": "¿Te sentías deprimida/deprimido?"
+	},
+	{
+		"id": 7,
+		"pregunta": "¿Sentías que todo lo que hacías era un esfuerzo?"
+	},
+	{
+		"id": 8,
+		"pregunta": "¿Te sentías optimista sobre el futuro?"
+	},
+	{
+		"id": 9,
+		"pregunta": "¿Pensaste que tu vida había sido un fracaso?"
+	},
+	{
+		"id": 10,
+		"pregunta": "¿Te sentías con miedo?"
+	}
+]

@@ -1,0 +1,97 @@
+
+/*Variables para mantener esquema de colores*/
+html {
+    --color-oscuro: #0C1D2F;
+    --color-medio-oscuro: #2B688C;
+    --color-medio-claro: #4279AF;
+    --color-claro: #B1D0EE;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+}
+
+
+/*Estilos de la barra superior de navegación*/
+nav {
+    position: fixed;
+    left: 0;
+    right: 0;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+    height: 80px;
+    padding: 12px 20px;
+
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+nav ul {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: baseline;
+
+}
+
+nav ul li {
+    margin: 4px 10px;
+    padding: 4px 10px;
+    list-style-type: none;
+}
+
+nav ul li a, nav>a, nav>div>span, nav>button {
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: white;
+    text-decoration: none;
+}
+
+nav ul li a:hover {
+    text-decoration: underline;
+}
+
+nav>div>span {
+    margin: 4px 16px;
+}
+
+nav>a:hover {
+    background-color: var(--color-medio-oscuro);
+}
+
+/*Estilo gneeral de los botones*/
+button, .boton {
+    padding: 10px 20px;
+
+    font-weight: 600;
+    text-transform: uppercase;
+	color: white;
+    cursor: pointer;
+
+    border-radius: 4px;
+	border: none;
+	background-color: var(--color-medio-claro);
+}
+
+button:hover, .boton:hover {
+    background-color: var(--color-medio-oscuro);
+}
+
+/**Alineación de textos*/
+.text-left {
+    text-align: left;
+}
+.text-center {
+    text-align: center;
+}
+.text-right {
+    text-align: right;
+}
+.text-justify {
+    text-align: justify;
+}

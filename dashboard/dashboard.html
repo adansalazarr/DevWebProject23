@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+	<head>
+		<meta charset=UTF-8>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>BeHappy | Dashboard Administrador</title>
+
+		<!--Configuraciones del Favicon-->
+		<link rel="apple-touch-icon" sizes="180x180" href="../favicon/apple-touch-icon.png">
+		<link rel="icon" type="image/png" sizes="32x32" href="../favicon/favicon-32x32.png">
+		<link rel="icon" type="image/png" sizes="16x16" href="../favicon/favicon-16x16.png">
+		<link rel="manifest" href="../favicon/site.webmanifest">
+		<link rel="mask-icon" href="../favicon/safari-pinned-tab.svg" color="#5bbad5">
+		<meta name="msapplication-TileColor" content="#da532c">
+		<meta name="theme-color" content="#ffffff">
+
+		<!--Archivos de estilos CSS-->
+		<link rel="stylesheet" type="text/css" href="../css/styles.css">
+		<link rel="stylesheet" type="text/css" href="../css/dashboard/dashboard.css">
+	</head>
+	<body>
+
+		<nav>
+			<ul>
+				<li><a href="../index.html">BeHappy</a></li>
+				<li><a href="dashboard.html">Frases</a></li>
+				<li><a href="preguntas.html">Preguntas</a></li>
+			</ul>
+			<div>
+				<button type="button" onclick="cerrarSesion()">Cerrar sesión</button>
+				<span id="sesionCorreo"></span>
+			</div>
+		</nav>
+
+		<div class="contenedor">
+			
+			<div class="panel-dashboard">
+				<h1>Administrar Frases motivacionales</h1>
+				<p>Administra las frases que se presentan a los estudiantes cuando entran a la plataforma. Recuerda que el objetivo es inspiradoras, motivadoras o alegrar a nuestros alumnos!</p>
+				<p><button type="button">Agregar nueva frase</button></p>
+
+				<table id="tablaFrases">
+				</table>
+			</div>
+			
+		</div>
+
+		<script type="text/javascript" src="../js/dashboard/dashboard.js"></script>
+	</body>
+</html>
