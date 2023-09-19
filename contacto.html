@@ -17,7 +17,7 @@
 
 		<!--Archivos de estilos CSS-->
 		<link rel="stylesheet" type="text/css" href="./css/styles.css">
-		<link rel="stylesheet" type="text/css" href="./css/formulario.css">
+		<link rel="stylesheet" type="text/css" href="./css/contacto.css">
 		<link rel="stylesheet" type="text/css" href="./css/dashboard/dashboard.css">
 	</head>
 	<body>
@@ -34,16 +34,22 @@
 				
 			<div class="panel-dashboard">
 				<section class="section-2">
-					<h1>Evaluarme</h1>
-					<div id="start-form-div">
-						<p>Se reailizará una serie de preguntas breves para evaluar tu estado emocional. Para mantener tu privacidad, las respuestas seleccionadas en el cuestionario no son almacenadas.</p>
-						<p>IMPORTANTE: Este formulario no se debe tomar como una herramienta de diagnóstico médico. Recomendamos que para un diagnóstico y/o apoyo profesional, te comuniques con los servicios de atención disponibles por el Tec.</p>
-						<p class="text-center">
-							<button type="button" onClick="showQuestion()">Hacer formulario</button>
-						</p>
+					<h1>Contacto profesional</h1>
+					<p>Si deseas realizar una cita personalizada con un profesional del área TQueremos, ingresa la información referente a tu caso y la redireccionaremos al contacto correspondiente.</p>
+					
+					<div class="contacto-formulario">
+						<label for="correo">Mi correo electrónico</label>
+						<input type="email" id="correo">
+						
+						<label for="asunto">Asunto</label>
+						<input type="text" id="asunto">
+
+						<label for="mensaje">Mensaje</label>
+						<textarea rows="4" id="mensaje"></textarea>
+
+						<button onclick="prepararCorreo()" type="button">Enviar correo</button>
 					</div>
-					<div id="question-container"></div>
-					<div id="result-container"></div>
+
 				</section>
 			</div>
 
@@ -55,6 +61,6 @@
 			</section>
 		</div>
 			
-		<script type="text/javascript" src="js/formulario.js"></script>
+		<script type="text/javascript" src="js/contacto.js"></script>
 	</body>
 </html>

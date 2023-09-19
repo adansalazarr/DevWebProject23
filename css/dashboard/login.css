@@ -50,3 +50,12 @@ input {
 	text-transform: uppercase;
 	color: white;
 }
+
+.g_id_signin {
+	margin-top: 20px;
+	text-align: center;
+}
+
+.g_id_signin iframe {
+	margin: 0 auto !important;
+}

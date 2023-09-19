@@ -1,6 +1,6 @@
 // Frases motivacionales
 let peticionFrases = new XMLHttpRequest();
-peticionFrases.open('GET', "../jsons/frases.json", false); 
+peticionFrases.open('GET', "./jsons/frases.json", false); 
 peticionFrases.send(null);
 const motivationalPhrases = JSON.parse(peticionFrases.responseText);
 

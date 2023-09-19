@@ -18,6 +18,7 @@
 		<!--Archivos de estilos CSS-->
 		<link rel="stylesheet" type="text/css" href="../css/styles.css">
 		<link rel="stylesheet" type="text/css" href="../css/dashboard/dashboard.css">
+		<link rel="stylesheet" type="text/css" href="../css/dashboard/perfil.css">
 	</head>
 	<body>
 
@@ -36,16 +37,31 @@
 		<div class="contenedor">
 			
 			<div class="panel-dashboard">
-				<h1>Administrar Frases motivacionales</h1>
-				<p>Administra las frases que se presentan a los estudiantes cuando entran a la plataforma. Recuerda que el objetivo es inspiradoras, motivadoras o alegrar a nuestros alumnos!</p>
-				<p><button type="button">Agregar nueva frase</button></p>
+				<h1>Administrar Perfil</h1>
+				<p>Actualiza tus datos de acceso al panel de control de la plataforma.</p>
 
-				<table id="tablaFrases">
-				</table>
+				<h4>Actualizar correo electrónico</h4>
+				<div class="perfil-formulario">
+					<label for="correo">Correo electrónico</label>
+					<input type="email" id="correo">
+					
+					<button onclick="actualizarCorreo()" type="button">Actualizar correo</button>
+				</div>
+
+				<h4>Actualizar contraseña</h4>
+				<div class="perfil-formulario">
+					<label for="contrasenaActual">Contraseña actual</label>
+					<input type="password" id="contrasenaActual">
+					<label for="contrasenaNueva">Nueva contraseña</label>
+					<input type="password" id="contrasenaNueva">
+					
+					<button onclick="actualizarContrasena()" type="button">Actualizar contraseña</button>
+				</div>
+
 			</div>
 			
 		</div>
 
-		<script type="text/javascript" src="../js/dashboard/dashboard.js"></script>
+		<script type="text/javascript" src="../js/dashboard/perfil.js"></script>
 	</body>
 </html>

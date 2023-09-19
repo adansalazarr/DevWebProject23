@@ -45,14 +45,14 @@ nav ul li {
     list-style-type: none;
 }
 
-nav ul li a, nav>a, nav>div>span, nav>button {
+nav a, nav>div>span, nav button {
     font-size: 1.2rem;
     font-weight: 500;
     color: white;
     text-decoration: none;
 }
 
-nav ul li a:hover {
+nav a:hover {
     text-decoration: underline;
 }
 
@@ -64,12 +64,26 @@ nav>a:hover {
     background-color: var(--color-medio-oscuro);
 }
 
+.section-4 {
+    background-color: var(--color-oscuro);
+    color: white;
+    text-align: center;
+    padding: 50px 0;
+}
+
+.social-buttons a {
+    display: inline-block;
+    margin: 10px;
+    text-decoration: none;
+}
+
 /*Estilo gneeral de los botones*/
 button, .boton {
     padding: 10px 20px;
 
     font-weight: 600;
     text-transform: uppercase;
+    text-decoration: none;
 	color: white;
     cursor: pointer;
 

@@ -1,5 +1,5 @@
 const perfil = document.querySelector("#sesionCorreo");
-perfil.innerHTML = `Hola! ${sessionStorage.getItem("usuarioCorreo")??""}`;
+perfil.innerHTML = `Hola ${sessionStorage.getItem("usuarioCorreo")??""}!`;
 
 recibirFrases();
 

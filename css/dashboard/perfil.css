@@ -1,0 +1,20 @@
+.perfil-formulario {
+    display: flex;
+	flex-direction: column;
+    justify-content: start;
+    align-items: stretch;
+	max-width: 50%;
+	min-width: 300px;
+	margin-bottom: 30px;
+}
+
+.perfil-formulario label {
+	margin-bottom: 4px;
+}
+
+.perfil-formulario input {
+	margin-bottom: 12px;
+	padding: 12px 10px;
+	border: 1px solid var(--color-medio-oscuro);
+	border-radius: 2px;
+}
