@@ -8,7 +8,7 @@ const motivationalText = document.getElementById("motivational-text");
 let currentPhraseIndex = 0;
 
 function changeMotivationalText() {
-    motivationalText.innerHTML = motivationalPhrases[currentPhraseIndex].frase.replace("-","<br />-");
+    motivationalText.innerHTML = motivationalPhrases[currentPhraseIndex].frase + "<br />-" + motivationalPhrases[currentPhraseIndex].autor??"Anónimo";
     currentPhraseIndex = (currentPhraseIndex + 1) % motivationalPhrases.length;
 }
 

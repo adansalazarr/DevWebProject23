@@ -149,7 +149,7 @@ button:hover, .boton:hover {
 	color:#FFF;
 	border-radius:50px;
 	box-shadow: 2px 2px 3px #999;
-    background-image: url('/img/phone.png'); 
+    background-image: url('../img/phone.png'); 
     background-repeat: no-repeat;
     background-position: center;
 }
