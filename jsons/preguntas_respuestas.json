@@ -1,0 +1,22 @@
+[
+	{
+		"id_pregunta": 1,
+		"id_respuesta": 3
+	},
+	{
+		"id_pregunta": 2,
+		"id_respuesta": 1
+	},
+	{
+		"id_pregunta": 2,
+		"id_respuesta": 2
+	},
+	{
+		"id_pregunta": 3,
+		"id_respuesta": 2
+	},
+	{
+		"id_pregunta": 3,
+		"id_respuesta": 1
+	}
+]

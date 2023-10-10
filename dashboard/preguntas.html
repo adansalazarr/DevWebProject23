@@ -43,21 +43,86 @@
 			<div class="panel-dashboard">
 				<h1>Administrar Preguntas</h1>
 				<p>Administra las preguntas que se le presentarán al alumno cuando solicite hacer un cuestionario sobre su estado emocional.</p>
-				<p>Recuerda que estas preguntas se evaluarán con las siguientes opciones como respuestas:</p>
+				<p>Recuerda vincular las preguntas a respuestas ya creadas en la tabla de administración correspondiente.</p>
 
-				<ul>
-					<li>Raremente o niguna vez</li>
-					<li>Alguna o pocas veces</li>
-					<li>Ocasionalmente o buena parte del tiempo</li>
-					<li>La mayor parte o todo el tiempo</li>
-				</ul>
-
-				<p><button type="button">Agregar nueva pregunta</button></p>
+				<p><button type="button" onclick="creaPreguntaMostrar()">Agregar nueva pregunta</button></p>
 
 				<table id="tablaPreguntas">
 				</table>
 			</div>
 			
+		</div>
+
+		<div id="creaPreguntaModal" class="modal" style="display: none;">
+			<div class="modal-panel">
+				<h1>Agregar pregunta <button class="modal-cierre" onclick="cierraModal()">x</button></h1>
+	
+				<label for="creaPregunta">Pregunta <span class="text-red">*</span></label>
+				<textarea id="creaPregunta" rows="3" placeholder="Escribe..."></textarea>
+		
+				<button type="button" onclick="creaPreguntaValidar()">Confirmar</button>
+				
+			</div>
+		</div>
+
+		<div id="actualizaPreguntaModal" class="modal" style="display: none;">
+			<div class="modal-panel">
+				<h1>Actualizar pregunta <button class="modal-cierre" onclick="cierraModal()">x</button></h1>
+	
+				<label for="actualizaPregunta">Pregunta <span class="text-red">*</span></label>
+				<textarea id="actualizaPregunta" rows="3" placeholder="Escribe..."></textarea>
+		
+				<button type="button" onclick="actualizaPreguntaValidar()">Confirmar</button>
+				
+			</div>
+		</div>
+
+		<div id="eliminaPreguntaModal" class="modal" style="display: none;">
+			<div class="modal-panel">
+				<h1>Eliminar pregunta <button class="modal-cierre" onclick="cierraModal()">x</button></h1>
+	
+				<p>¿Proceder a eliminar la pregunta seleccionada?</p>
+
+				<p id="eliminaPregunta"></p>
+
+				<button type="button" class="boton boton-red" onclick="eliminaPreguntaAccion()">Confirmar</button>
+				
+			</div>
+		</div>
+
+		<div id="vinculaRespuestaModal" class="modal" style="display: none;">
+			<div class="modal-panel">
+				<h1>Agregar respuesta a pregunta <button class="modal-cierre" onclick="cierraModal()">x</button></h1>
+
+				<p><b>Pregunta:</b></p>
+				<p id="vinculaPregunta"></p>
+				<br>
+	
+				<label for="vinculaRespuesta">Respuesta <span class="text-red">*</span></label>
+				<select id="vinculaRespuesta">
+				</select>
+		
+				<button type="button" onclick="vinculaRespuestaValidar()">Confirmar</button>
+				
+			</div>
+		</div>
+
+		<div id="desvinculaRespuestaModal" class="modal" style="display: none;">
+			<div class="modal-panel">
+				<h1>Eliminar respuesta de pregunta <button class="modal-cierre" onclick="cierraModal()">x</button></h1>
+
+				<p>¿Proceder a eliminar la respuesta seleccionada?</p>
+
+				<p><b>Pregunta:</b></p>
+				<p id="desvinculaPregunta"></p>
+				<br>
+
+				<p><b>Respuesta:</b></p>
+				<p id="desvinculaRespuesta"></p>
+	
+				<button type="button" class="boton boton-red" onclick="desvinculaRespuestaAccion()">Confirmar</button>
+				
+			</div>
 		</div>
 
 		<script type="text/javascript" src="../js/dashboard/preguntas.js"></script>
