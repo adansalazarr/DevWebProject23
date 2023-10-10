@@ -1,0 +1,17 @@
+[
+	{
+		"id": 1,
+		"respuesta": "Si",
+		"valor": 1
+	},
+	{
+		"id": 2,
+		"respuesta": "No",
+		"valor": 2
+	},
+	{
+		"id": 3,
+		"respuesta": "Bien",
+		"valor": 3
+	}
+]
