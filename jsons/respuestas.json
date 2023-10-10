@@ -7,11 +7,21 @@
 	{
 		"id": 2,
 		"respuesta": "No",
-		"valor": 2
+		"valor": 3
 	},
 	{
 		"id": 3,
-		"respuesta": "Bien",
+		"respuesta": "Motivado",
 		"valor": 3
+	},
+	{
+		"id": 4,
+		"respuesta": "Bien",
+		"valor": 2
+	},
+	{
+		"id": 5,
+		"respuesta": "Nada bien",
+		"valor": 1
 	}
 ]
