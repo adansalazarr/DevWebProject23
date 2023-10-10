@@ -15,53 +15,81 @@ body {
 }
 
 
-/*Estilos de la barra superior de navegación*/
+/* Estilos para la barra de navegación */
 nav {
+    background-color: rgba(0, 0, 0, 0.6);
+    color: white;
     position: fixed;
+    top: 0;
     left: 0;
     right: 0;
-
+    height: 80px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    
-    height: 80px;
     padding: 12px 20px;
-
-    background-color: rgba(0, 0, 0, 0.6);
 }
 
-nav ul {
+.navbar-header a {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: white;
+    text-decoration: none;
+}
+
+.menu-icon {
+    display: none;
+    font-size: 1.5rem;
+    color: white;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.navbar-menu {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
     display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    align-items: baseline;
-
 }
 
-nav ul li {
+.navbar-menu li {
     margin: 4px 10px;
     padding: 4px 10px;
-    list-style-type: none;
 }
 
-nav a, nav>div>span, nav button {
+.navbar-menu a {
     font-size: 1.2rem;
     font-weight: 500;
     color: white;
     text-decoration: none;
 }
 
-nav a:hover {
-    text-decoration: underline;
-}
+@media screen and (max-width: 768px) {
+    .menu-icon {
+        display: block;
+    }
+    
+    .navbar-menu {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 80px;
+        left: 0;
+        right: 0;
+        background-color: rgba(0, 0, 0, 0.6);
+        z-index: 1;
+    }
 
-nav>div>span {
-    margin: 4px 16px;
-}
+    .navbar-menu li {
+        margin: 0;
+        padding: 10px 20px;
+        text-align: center;
+    }
 
-nav>a:hover {
-    background-color: var(--color-medio-oscuro);
+    .navbar-menu.active {
+        display: flex;
+    }
 }
 
 .section-4 {
@@ -108,4 +136,56 @@ button:hover, .boton:hover {
 }
 .text-justify {
     text-align: justify;
+}
+
+/* Estilo base para el botón de teléfono */
+.phone-button {
+	position:fixed;
+	width:60px;
+	height:60px;
+	bottom:40px;
+	right:40px;
+	background-color:#4279AF;
+	color:#FFF;
+	border-radius:50px;
+	box-shadow: 2px 2px 3px #999;
+    background-image: url('/img/phone.png'); 
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+/* Cambia el cursor al puntero al pasar el ratón sobre el botón */
+.phone-button:hover {
+    cursor: pointer;
+}
+
+/* iframe responsivo */
+.container {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    padding-top: 56.25%;
+  }
+
+  .responsive-iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+/* Estilo para el enlace con id="sesionCorreo" */
+#sesionCorreo {
+    color: white;
+    text-decoration: none;
+    margin-left: 10px;
+    font-weight: bold;
+}
+@media screen and (max-width: 1060px) {
+    #sesionCorreo {
+        display: none;
+    }
 }
