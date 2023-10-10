@@ -32,7 +32,11 @@ body {
 	width: 100%;
 	border-spacing: 0;
 	border: 1px solid var(--color-oscuro);
+}
 
+.tabla-columna-comprime {
+	width: 1%;
+	white-space: nowrap;
 }
 
 .panel-dashboard tr td, .panel-dashboard tr th {

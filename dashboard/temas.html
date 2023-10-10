@@ -41,67 +41,53 @@
 		<div class="contenedor">
 			
 			<div class="panel-dashboard">
-				<h1>Administrar Frases motivacionales</h1>
-				<p>Administra las frases que se presentan a los estudiantes cuando entran a la plataforma. Recuerda que el objetivo es inspiradoras, motivadoras o alegrar a nuestros alumnos!</p>
-				<p><button type="button" onclick="creaFraseMostrar()">Agregar nueva frase</button></p>
+				<h1>Administrar Temas</h1>
+				<p>Administra temas de interés para personalizar la experiencia de los alumnos en la plataforma.</p>
+				<p><button type="button" onclick="creaTemaMostrar()">Agregar nuevo tema</button></p>
 
-				<table id="tablaFrases">
+				<table id="tablaTemas">
 				</table>
 			</div>
 			
 		</div>
 
-		<div id="creaFraseModal" class="modal" style="display: none;">
+		<div id="creaTemaModal" class="modal" style="display: none;">
 			<div class="modal-panel">
-				<h1>Agregar frase <button class="modal-cierre" onclick="cierraModal()">x</button></h1>
+				<h1>Agregar tema <button class="modal-cierre" onclick="cierraModal()">x</button></h1>
 	
-				<label for="creaFrase">Frase <span class="text-red">*</span></label>
-				<textarea id="creaFrase" rows="3" placeholder="Escribe..."></textarea>
-	
-				<label for="creaAutor">Autor (opcional)</label>
-				<input type="text" id="creaAutor" placeholder="Escribe...">
-
 				<label for="creaTema">Tema <span class="text-red">*</span></label>
-				<select id="creaTema">
-				</select>
-	
-				<button type="button" onclick="creaFraseValidar()">Confirmar</button>
+				<input type="text" id="creaTema" placeholder="Escribe...">
+
+				<button type="button" onclick="creaTemaValidar()">Confirmar</button>
 				
 			</div>
 		</div>
 
-		<div id="actualizaFraseModal" class="modal" style="display: none;">
+		<div id="actualizaTemaModal" class="modal" style="display: none;">
 			<div class="modal-panel">
-				<h1>Actualizar frase <button class="modal-cierre" onclick="cierraModal()">x</button></h1>
-	
-				<label for="actualizaFrase">Frase <span class="text-red">*</span></label>
-				<textarea id="actualizaFrase" rows="3" placeholder="Escribe..."></textarea>
-	
-				<label for="actualizaAutor">Autor (opcional)</label>
-				<input type="text" id="actualizaAutor" placeholder="Escribe...">
+				<h1>Actualizar tema <button class="modal-cierre" onclick="cierraModal()">x</button></h1>
 
 				<label for="actualizaTema">Tema <span class="text-red">*</span></label>
-				<select id="actualizaTema">
-				</select>
+				<input type="text" id="actualizaTema" placeholder="Escribe...">
 	
-				<button type="button" onclick="actualizaFraseValidar()">Confirmar</button>
+				<button type="button" onclick="actualizaTemaValidar()">Confirmar</button>
 				
 			</div>
 		</div>
 
-		<div id="eliminaFraseModal" class="modal" style="display: none;">
+		<div id="eliminaTemaModal" class="modal" style="display: none;">
 			<div class="modal-panel">
-				<h1>Eliminar frase <button class="modal-cierre" onclick="cierraModal()">x</button></h1>
+				<h1>Eliminar tema <button class="modal-cierre" onclick="cierraModal()">x</button></h1>
 	
-				<p>¿Proceder a eliminar la frase seleccionada?</p>
+				<p>¿Proceder a eliminar el tema seleccionado?</p>
 
-				<p id="eliminaFrase"></p>
+				<p id="eliminaTema"></p>
 
-				<button type="button" class="boton boton-red" onclick="eliminaFraseAccion()">Confirmar</button>
+				<button type="button" class="boton boton-red" onclick="eliminaTemaAccion()">Confirmar</button>
 				
 			</div>
 		</div>
 
-		<script type="text/javascript" src="../js/dashboard/dashboard.js"></script>
+		<script type="text/javascript" src="../js/dashboard/temas.js"></script>
 	</body>
 </html>
