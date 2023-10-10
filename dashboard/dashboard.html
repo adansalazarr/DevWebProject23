@@ -42,12 +42,52 @@
 			<div class="panel-dashboard">
 				<h1>Administrar Frases motivacionales</h1>
 				<p>Administra las frases que se presentan a los estudiantes cuando entran a la plataforma. Recuerda que el objetivo es inspiradoras, motivadoras o alegrar a nuestros alumnos!</p>
-				<p><button type="button">Agregar nueva frase</button></p>
+				<p><button type="button" onclick="creaFraseMostrar()">Agregar nueva frase</button></p>
 
 				<table id="tablaFrases">
 				</table>
 			</div>
 			
+		</div>
+
+		<div id="creaFraseModal" class="modal" style="display: none;">
+			<div class="modal-panel">
+				<h1>Agregar frase <button class="modal-cierre" onclick="cierraModal()">x</button></h1>
+	
+				<label for="creaFrase">Frase <span class="text-red">*</span></label>
+				<textarea id="creaFrase" rows="3" placeholder="Escribe..."></textarea>
+	
+				<label for="creaAutor">Autor (opcional)</label>
+				<input type="text" id="creaAutor" placeholder="Escribe...">
+
+				<label for="creaTema">Tema <span class="text-red">*</span></label>
+				<select id="creaTema">
+					<option value="0">-Selecciona-</option>
+				</select>
+	
+				<button type="button" onclick="creaFraseValidar()">Confirmar</button>
+				
+			</div>
+		</div>
+
+		<div id="actualizaFraseModal" class="modal" style="display: none;">
+			<div class="modal-panel">
+				<h1>Actualizar frase <button class="modal-cierre" onclick="cierraModal()">x</button></h1>
+	
+				<label for="actualizaFrase">Frase <span class="text-red">*</span></label>
+				<textarea id="actualizaFrase" rows="3" placeholder="Escribe..."></textarea>
+	
+				<label for="actualizaAutor">Autor (opcional)</label>
+				<input type="text" id="actualizaAutor" placeholder="Escribe...">
+
+				<label for="actualizaTema">Tema <span class="text-red">*</span></label>
+				<select id="actualizaTema">
+					<option value="0">-Selecciona-</option>
+				</select>
+	
+				<button type="button" onclick="actualizaFraseValidar()">Confirmar</button>
+				
+			</div>
 		</div>
 
 		<script type="text/javascript" src="../js/dashboard/dashboard.js"></script>
