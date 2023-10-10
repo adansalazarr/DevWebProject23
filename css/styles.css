@@ -184,6 +184,73 @@ button:hover, .boton:hover {
     margin-left: 10px;
     font-weight: bold;
 }
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
+
+    display: flex;
+    justify-content: center;
+
+    background-color: #000000CC;
+}
+
+.modal-panel {
+    display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+
+	margin-top:60px;
+	padding: 20px 40px;
+    padding-bottom: 80px;
+    width: 50%;
+    max-width: 600px;
+    height: fit-content;
+
+	line-height: 1.5;
+	background-color: white;
+	border-radius: 8px;
+}
+
+
+.modal-panel label {
+	margin-bottom: 4px;
+}
+
+.modal-panel input, .modal-panel textarea, .modal-panel select {
+	margin-bottom: 20px;
+	padding: 12px 10px;
+	border: 1px solid var(--color-medio-oscuro);
+	border-radius: 2px;
+}
+
+.modal-panel button {
+	height: 36px;
+	margin-top: 20px;
+	padding: 0 16px;
+
+	text-transform: uppercase;
+	color: white;
+}
+
+.modal-panel button.modal-cierre {
+    float: right;
+	height: 24px;
+    width: 24px;
+    margin-top: 0;
+    padding: 0;
+    color: var(--color-oscuro);
+    background-color: white;
+}
+
+.text-red {
+    color: red;
+}
+
 @media screen and (max-width: 1060px) {
     #sesionCorreo {
         display: none;
