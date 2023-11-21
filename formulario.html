@@ -20,22 +20,24 @@
 		<link rel="stylesheet" type="text/css" href="./css/formulario.css">
 		<link rel="stylesheet" type="text/css" href="./css/dashboard/dashboard.css">
 	</head>
+	
 	<body>
-		        <!--Botón ayuda TEC-->
-				<a href="tel:8008139500" class="phone-button">
-					<div class="phone-icon"></div>
-				</a>
-				<nav>
-					<div class="navbar-header">
-						<a href="./index.html">BeHappy</a>
-						<button id="menu-toggle" class="menu-icon">&#9776;</button>
-					</div>
-					<ul id="menu" class="navbar-menu">
-						<li><a href="./formulario.html">Evaluarme</a></li>
-						<li><a href="./contacto.html">Contacto profesional</a></li>
-						<li><a href="./dashboard/index.html">Iniciar sesión</a></li>
-					</ul>
-				</nav>
+		<!--Botón ayuda TEC-->
+		<a href="tel:8008139500" class="phone-button">
+			<div class="phone-icon"></div>
+		</a>
+
+		<nav>
+			<div class="navbar-header">
+				<a href="./index.html">BeHappy</a>
+				<button id="menu-toggle" class="menu-icon">&#9776;</button>
+			</div>
+			<ul id="menu" class="navbar-menu">
+				<li><a href="./formulario.html">Evaluarme</a></li>
+				<li><a href="./contacto.html">Contacto profesional</a></li>
+				<li><a href="./dashboard/index.html">Iniciar sesión</a></li>
+			</ul>
+		</nav>
 
 		<div class="contenedor">
 				
@@ -46,7 +48,7 @@
 						<p>Se reailizará una serie de preguntas breves para evaluar tu estado emocional. Para mantener tu privacidad, las respuestas seleccionadas en el cuestionario no son almacenadas.</p>
 						<p>IMPORTANTE: Este formulario no se debe tomar como una herramienta de diagnóstico médico. Recomendamos que para un diagnóstico y/o apoyo profesional, te comuniques con los servicios de atención disponibles por el Tec.</p>
 						<p class="text-center">
-							<button type="button" onClick="showQuestion()">Hacer formulario</button>
+							<button type="button" onClick="iniciarCuestionario()">Hacer formulario</button>
 						</p>
 					</div>
 					<div id="question-container"></div>
@@ -62,6 +64,12 @@
 			</section>
 		</div>
 			
+		<!--Codigo de plugin de Firebase-->
+		<script src="https://www.gstatic.com/firebasejs/10.6.0/firebase-app-compat.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/10.6.0/firebase-firestore-compat.js"></script>
+		<script type="text/javascript" src="./js/setup.js"></script>
+
+		<!--Codigo de página actual-->
 		<script type="text/javascript" src="js/formulario.js"></script>
 	</body>
 </html>

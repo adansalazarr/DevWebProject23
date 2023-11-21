@@ -9,7 +9,7 @@
         <link rel="apple-touch-icon" sizes="180x180" href="./favicon/apple-touch-icon.png">
         <link rel="icon" type="image/png" sizes="32x32" href="./favicon/favicon-32x32.png">
         <link rel="icon" type="image/png" sizes="16x16" href="./favicon/favicon-16x16.png">
-        <link rel="manifest" href="./favicon/site.webmanifest">
+        <link rel="manifest" href="favicon/site.webmanifest">
         <link rel="mask-icon" href="./favicon/safari-pinned-tab.svg" color="#5bbad5">
         <link rel="shortcut icon" href="./favicon/favicon.ico">
         <meta name="msapplication-TileColor" content="#da532c">
@@ -19,11 +19,13 @@
         <link rel="stylesheet" type="text/css" href="./css/styles.css">
         <link rel="stylesheet" type="text/css" href="./css/inicio.css">
     </head>
+
     <body>
         <!--Botón ayuda TEC-->
         <a href="tel:8008139500" class="phone-button">
             <div class="phone-icon"></div>
         </a>
+
         <nav>
             <div class="navbar-header">
                 <a href="./index.html">BeHappy</a>
@@ -38,7 +40,7 @@
 
         <section class="section-1">
             <div class="overlay">
-                <h1 id="motivational-text">Texto motivacional cambiante</h1>
+                <h1 id="motivational-text"></h1>
             </div>
         </section>
         
@@ -63,7 +65,13 @@
                 <a href="https://tqueremos.tec.mx/es/lineatqueremos" class="boton" target="_blank">Línea de apoyo TQueremos</a>
             </div>
         </section>
+
+        <!--Codigo de plugin de Firebase-->
+		<script src="https://www.gstatic.com/firebasejs/10.6.0/firebase-app-compat.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/10.6.0/firebase-firestore-compat.js"></script>
+		<script type="text/javascript" src="./js/setup.js"></script>
         
-        <script type="text/javascript" src="./js/script.js"></script>
+		<!--Codigo de página actual-->
+        <script type="text/javascript" src="./js/index.js"></script>
     </body>
 </html>

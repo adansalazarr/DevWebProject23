@@ -1,6 +1,11 @@
+const usuario = sessionStorage.getItem("usuarioCorreo") ?? "";
+if (usuario == "") {
+	window.location.href = "../index.html";
+}
 const perfil = document.querySelector("#sesionCorreo");
-perfil.innerHTML = `Hola ${sessionStorage.getItem("usuarioCorreo")??""}!`;
+perfil.innerHTML = `Buen día! ${usuario}`;
 
+document.querySelector("#correo").value = usuario;
 
 /**Función para subir el nuevo correo electrónico a datos de acceso del usuario */
 function actualizarCorreo() {

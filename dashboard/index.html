@@ -19,14 +19,12 @@
 		<link rel="stylesheet" type="text/css" href="../css/styles.css">
 		<link rel="stylesheet" type="text/css" href="../css/dashboard/login.css">
 
-		<!--Libreria de google OAuth-->
-		<script src="https://accounts.google.com/gsi/client"></script>
 	</head>
 	<body>
 
 		<nav>
             <div class="navbar-header">
-                <a href="./index.html">BeHappy</a>
+                <a href="../index.html">BeHappy</a>
                 <button id="menu-toggle" class="menu-icon">&#9776;</button>
             </div>
         </nav>
@@ -47,30 +45,12 @@
 			</div>
 		</div>
 
-		// Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
-
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
-const firebaseConfig = {
-  apiKey: "AIzaSyCiHNUSeT6WuB0-pfGAXWX_iL6OboVF5O4",
-  authDomain: "devwebapps23.firebaseapp.com",
-  projectId: "devwebapps23",
-  storageBucket: "devwebapps23.appspot.com",
-  messagingSenderId: "482052415267",
-  appId: "1:482052415267:web:7acc0c1ffb75a6043a7696",
-  measurementId: "G-BCTBKJJTD4"
-};
-
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
-		<script src="https://www.gstatic.com/firebasejs/10.6.0/firebase.js"></script>
+		<!--Codigo de plugin de Firebase-->
 		<script src="https://www.gstatic.com/firebasejs/10.6.0/firebase-app-compat.js"></script>
 		<script src="https://www.gstatic.com/firebasejs/10.6.0/firebase-firestore-compat.js"></script>
-		<script type="text/javascript" src="../js/dashboard/login.js"></script>
+		<script type="text/javascript" src="../js/setup.js"></script>
+
+		<!--Codigo de página actual-->
+		<script type="text/javascript" src="../js/dashboard/index.js"></script>
 	</body>
 </html>
