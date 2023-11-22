@@ -1,16 +1,18 @@
 // Obtiene las frases de la BD
 function obtenerTextos(tema = 0) {
-    const temasColeccion = db.collection("frases");
+    const frasesColeccion = db.collection("Frases");
 
     // Si el alumno tiene un tema, aplica filtro en consulta
     if (tema != 0) {
-        temasColeccion.where("tema", "==", tema);
+        frasesColeccion.where("tema", "==", tema);
     }
 
-    return temasColeccion.get().then((querySnapshot) => {
+    return frasesColeccion.get().then((querySnapshot) => {
         const frasesLista = [];
         querySnapshot.forEach((doc) => {
-            frasesLista.push({ ...doc.data() });
+            const tmp = { ...doc.data() };
+			tmp.id = doc.id;
+            frasesLista.push(tmp);
         });
         return frasesLista;
     });
@@ -18,13 +20,15 @@ function obtenerTextos(tema = 0) {
 
 // Cambia el contenido del HTML que muestra la frase
 function changeMotivationalText(frasesLista, indice) {
-    const motivationalText = document.getElementById("motivational-text");
-
-    motivationalText.innerHTML = frasesLista[indice].frase + "<br />-" + frasesLista[indice].autor??"Anónimo";
-    indice = (indice + 1) % frasesLista.length;
-
-    // Espera unos segundos antes de mostrar la siguiente frase
-    setTimeout(changeMotivationalText, 4000, frasesLista, indice);
+    if (indice < frasesLista.length) {
+        const motivationalText = document.getElementById("motivational-text");
+    
+        motivationalText.innerHTML = frasesLista[indice].frase + "<br />-" + frasesLista[indice].autor??"Anónimo";
+        indice = (indice + 1) % frasesLista.length;
+    
+        // Espera unos segundos antes de mostrar la siguiente frase
+        setTimeout(changeMotivationalText, 4000, frasesLista, indice);
+    }
 }
 
 // Solicita las frases y despues las muestra, cambiando en un intervalo definido

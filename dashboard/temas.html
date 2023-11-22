@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="es-MX">
 	<head>
-		<meta charset=UTF-8>
+		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<title>BeHappy | Dashboard Administrador</title>
 
@@ -24,7 +24,7 @@
 		<nav>
 			<div class="navbar-header">
 				<a href="../index.html">BeHappy</a>
-				<button id="menu-toggle" class="menu-icon">&#9776;</button>
+				<button type="button" class="menu-icon" onclick="toggleMenu()">&#9776;</button>
 			</div>
 			<ul id="menu" class="navbar-menu">
 				<li><a href="preguntas.html">Preguntas</a></li>
@@ -32,7 +32,7 @@
 				<li><a href="temas.html">Temas</a></li>
 				<li><a href="dashboard.html">Frases</a></li>
 			</ul>
-			<div>
+			<div class="dashboard-acciones">
 				<button type="button" onclick="cerrarSesion()">Cerrar sesión</button>
 				<a href="perfil.html" id="sesionCorreo"></a>
 			</div>
@@ -45,8 +45,24 @@
 				<p>Administra temas de interés para personalizar la experiencia de los alumnos en la plataforma.</p>
 				<p><button type="button" onclick="creaTemaMostrar()">Agregar nuevo tema</button></p>
 
-				<table id="tablaTemas">
-				</table>
+				<div class="contenedor-tabla">
+					<table id="tablaTemas">
+						<thead>
+							<tr>
+								<th class="tabla-columna-comprime text-right">Id</th>
+								<th>Tema</th>
+								<th class="tabla-columna-comprime text-center">Opciones</th>
+							<tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td colspan="3" class="text-center">
+									Buscando información...
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
 			</div>
 			
 		</div>
@@ -57,6 +73,7 @@
 	
 				<label for="creaTema">Tema <span class="text-red">*</span></label>
 				<input type="text" id="creaTema" placeholder="Escribe...">
+				<small id="creaTemaAlerta" class="text-red"></small>
 
 				<button type="button" onclick="creaTemaValidar()">Confirmar</button>
 				
@@ -69,6 +86,7 @@
 
 				<label for="actualizaTema">Tema <span class="text-red">*</span></label>
 				<input type="text" id="actualizaTema" placeholder="Escribe...">
+				<small id="actualizaTemaAlerta" class="text-red"></small>
 	
 				<button type="button" onclick="actualizaTemaValidar()">Confirmar</button>
 				
@@ -88,6 +106,32 @@
 			</div>
 		</div>
 
+		<div id="esperaModal" class="modal" style="display: none;">
+			<div class="modal-panel">
+				<h1>Procesando...</h1>
+	
+				<p>Se está procesando la solicitud al servidor</p>
+			</div>
+		</div>
+
+		<div id="resultadoModal" class="modal" style="display: none;">
+			<div class="modal-panel">
+				<h1>Resultado <button class="modal-cierre" onclick="cierraModal()">x</button></h1>
+	
+				<p>La solicitud se ha completado correctamente!</p>				
+			</div>
+		</div>
+
+		<!--Codigo de plugin de Firebase-->
+		<script src="https://www.gstatic.com/firebasejs/10.6.0/firebase-app-compat.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/10.6.0/firebase-firestore-compat.js"></script>
+
+		<!--Codigo reutilizable-->
+		<script type="text/javascript" src="../js/setup.js"></script>
+		<script type="text/javascript" src="../js/general.js"></script>
+		
+		<!--Codigo de página actual-->
+		<script type="text/javascript" src="../js/dashboard/general.js"></script>
 		<script type="text/javascript" src="../js/dashboard/temas.js"></script>
 	</body>
 </html>

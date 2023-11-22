@@ -8,10 +8,12 @@ let puntuacion_minimo = 0;
 
 // Obtener preguntas
 function obtenerPreguntas() {
-    return db.collection("preguntas").get().then((querySnapshot) => {
+    return db.collection("Preguntas").get().then((querySnapshot) => {
         const preguntasLista = [];
         querySnapshot.forEach((doc) => {
-            preguntasLista.push({ ...doc.data() });
+            const tmp = { ...doc.data() };
+			tmp.id = doc.id;
+            preguntasLista.push(tmp);
         });
         return preguntasLista;
     });
@@ -19,10 +21,12 @@ function obtenerPreguntas() {
 
 // Obtener vínculos entre preguntas y respuestas
 function obtenerVinculos() {
-    return db.collection("preguntas_respuestas").get().then((querySnapshot) => {
+    return db.collection("Preguntas_Respuestas").get().then((querySnapshot) => {
         const vinculosLista = [];
         querySnapshot.forEach((doc) => {
-            vinculosLista.push({ ...doc.data() });
+            const tmp = { ...doc.data() };
+			tmp.id = doc.id;
+            vinculosLista.push(tmp);
         });
         return vinculosLista;
     });
@@ -30,10 +34,12 @@ function obtenerVinculos() {
 
 // Obtener respuestas
 function obtenerRespuestas() {
-    return db.collection("respuestas").get().then((querySnapshot) => {
+    return db.collection("Respuestas").get().then((querySnapshot) => {
         const respuestasLista = [];
         querySnapshot.forEach((doc) => {
-            respuestasLista.push({ ...doc.data() });
+            const tmp = { ...doc.data() };
+			tmp.id = doc.id;
+            respuestasLista.push(tmp);
         });
         return respuestasLista;
     });

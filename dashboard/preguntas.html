@@ -32,7 +32,7 @@
 				<li><a href="temas.html">Temas</a></li>
 				<li><a href="dashboard.html">Frases</a></li>
 			</ul>
-			<div>
+			<div class="dashboard-acciones">
 				<button type="button" onclick="cerrarSesion()">Cerrar sesión</button>
 				<a href="perfil.html" id="sesionCorreo"></a>
 			</div>
@@ -47,8 +47,10 @@
 
 				<p><button type="button" onclick="creaPreguntaMostrar()">Agregar nueva pregunta</button></p>
 
-				<table id="tablaPreguntas">
-				</table>
+				<div class="contenedor-tabla">
+					<table id="tablaPreguntas">
+					</table>
+				</div>
 			</div>
 			
 		</div>
@@ -125,6 +127,16 @@
 			</div>
 		</div>
 
+		<!--Codigo de plugin de Firebase-->
+		<script src="https://www.gstatic.com/firebasejs/10.6.0/firebase-app-compat.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/10.6.0/firebase-firestore-compat.js"></script>
+
+		<!--Codigo reutilizable-->
+		<script type="text/javascript" src="../js/setup.js"></script>
+		<script type="text/javascript" src="../js/general.js"></script>
+		
+		<!--Codigo de página actual-->
+		<script type="text/javascript" src="../js/dashboard/general.js"></script>
 		<script type="text/javascript" src="../js/dashboard/preguntas.js"></script>
 	</body>
 </html>

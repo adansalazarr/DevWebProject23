@@ -1,139 +1,301 @@
-const usuario = sessionStorage.getItem("usuarioCorreo") ?? "";
-if (usuario == "") {
-	window.location.href = "../index.html";
-}
-const perfil = document.querySelector("#sesionCorreo");
-perfil.innerHTML = `Buen día! ${usuario}`;
-
 let listaFrasesGlobal = [];
-let listaTemasGlobal = [];
+let fraseSeleccionadaId = null;
 
-recibirFrases();
+validaSesion();
+mostrarFrases();
 
-/**Función para llenar la tabla de frases con datos */
-function recibirFrases() {
-	
-	let peticionFrases = new XMLHttpRequest();
-	peticionFrases.open('GET', "../jsons/frases.json", false); 
-	peticionFrases.send(null);
-	listaFrasesGlobal = JSON.parse(peticionFrases.responseText);
+//Consulta a BD para obtener todas las frases
+function obtenerFrases() {
+	const frasesColeccion = db.collection("Frases");
 
-	let peticionTemas = new XMLHttpRequest();
-	peticionTemas.open('GET', "../jsons/temas.json", false); 
-	peticionTemas.send(null);
-	listaTemasGlobal = JSON.parse(peticionTemas.responseText);
+    return frasesColeccion.get().then((querySnapshot) => {
+        const frasesLista = [];
 
-	/**Llenar los select de formularios con temas disponibles*/
+		querySnapshot.forEach((doc) => {
+			const tmp = { ...doc.data() };
+			tmp.id = doc.id;
+            frasesLista.push(tmp);
+        });
+
+		return frasesLista;
+    });
+}
+
+//Consulta a BD para obtener todos los temas
+function obtenerTemas() {
+	const temasColeccion = db.collection("Temas");
+
+    return temasColeccion.get().then((querySnapshot) => {
+        const temasLista = [];
+
+		querySnapshot.forEach((doc) => {
+			const tmp = { ...doc.data() };
+			tmp.id = doc.id;
+            temasLista.push(tmp);
+        });
+
+		return temasLista;
+    });
+}
+
+// Agrega temas a los elementos <select> de los formularios
+function procesarTemas(temasLista) {
+	// Opción por defecto
 	let selectOpciones = `<option value="0">-Selecciona-</option>`;
 
-	listaTemasGlobal.forEach(item => {
+	//Genera HTML de cada opción de tema
+	temasLista.forEach(item => {
 		selectOpciones += `<option value="${item.id}">${item.tema}</option>`;
 	});
 
-	const selectCreaTema = document.querySelector("#creaTema");
-	selectCreaTema.innerHTML = selectOpciones;
+	// Actualiza los elementos en HTML
+	document.querySelector("#creaTema").innerHTML = selectOpciones;
+	document.querySelector("#actualizaTema").innerHTML = selectOpciones;
+}
 
-	const selectActualizaTema = document.querySelector("#actualizaTema");
-	selectActualizaTema.innerHTML = selectOpciones;
+// Construye el HTML de la tabla y lo actualiza
+function procesarFrases(frasesLista) {
 
-	/**Llenar la tabla de datos */
+	// Encabezados de tabla
 	let tablaHTML = `
 		<thead>
 			<tr>
-				<th class="tabla-columna-comprime text-right">Id</th>
+				<th class="tabla-columna-comprime">Id</th>
 				<th>Frase</th>
 				<th>Autor</th>
-				<th class="text-right">Tema</th>
+				<th>Tema</th>
 				<th class="tabla-columna-comprime text-center">Opciones</th>
 			<tr>
 		</thead>
 		<tbody>`;
 
-		listaFrasesGlobal.forEach(fraseItem => {
+	if (frasesLista.length > 0) {
+		// Genera las filas de tabla con arreglo de frases
+		frasesLista.forEach(fraseItem => {
+			let autorFormat = fraseItem.autor??``;
+
+			if (autorFormat == "")
+				autorFormat = `Anónimo`;
+
+			tablaHTML += `
+				<tr>
+					<td class="tabla-columna-comprime">${fraseItem.id}</td>
+					<td>${fraseItem.frase}</td>
+					<td>${autorFormat}</td>
+					<td>${fraseItem.tema_nombre}</td>
+					<td class="tabla-columna-comprime text-center">
+						<button type="button" onclick="actualizaFraseMostrar('${fraseItem.id}')">Editar</button>
+						<button type="button" onclick="eliminaFraseMostrar('${fraseItem.id}')" class="boton boton-red">Eliminar</button>
+					</td>
+				</tr>`;
+		});
+	} else {
+		// Arreglo de frases vacío, notificar en tabla
 		tablaHTML += `
-			<tr>
-				<td class="tabla-columna-comprime text-right">${fraseItem.id}</td>
-				<td>${fraseItem.frase}</td>
-				<td>${fraseItem.autor}</td>
-				<td class="text-right">${listaTemasGlobal.find(item => fraseItem.tema == item.id).tema}</td>
-				<td class="tabla-columna-comprime text-center">
-					<button type="button" onclick="actualizaFraseMostrar(${fraseItem.id})">Editar</button>
-					<button type="button" onclick="eliminaFraseMostrar(${fraseItem.id})" class="boton boton-red">Eliminar</button>
-				</td>
-			</tr>`;
-	});
+				<tr>
+					<td colspan="5" class="text-center">
+						No se encontraron registros para frases motivacionales
+					</td>
+				</tr>`;
+	}
 
 	tablaHTML += `</tbody>`;
 
+	// Actualizar HTML de la tabla
 	const tablaElemento = document.querySelector("#tablaFrases");
 	tablaElemento.innerHTML = tablaHTML;
 }
 
+// Solicita los datos necesarios a BD para actualizar el contenido de la página
+function mostrarFrases() {
+	Promise.all([obtenerFrases(), obtenerTemas()]).then(([frasesLista, temasLista]) => {
 
+		procesarTemas(temasLista);
+
+		// Vincula el nombre del tema con el id_tema dentro de cada frase
+		frasesLista.forEach(fraseItem => {
+			fraseItem.tema_nombre = temasLista.find(item => fraseItem.id_tema == item.id).tema;
+		});
+
+		listaFrasesGlobal = frasesLista;
+		fraseSeleccionadaId = null;
+
+        procesarFrases(frasesLista);
+
+    }).catch(error => {
+        console.error("Error obteniendo documentos: ", error);
+    });	
+}
+
+
+/*** FUNCIONES PARA CREAR FRASE ***/
+// Vacía los input y muestra el modal
 function creaFraseMostrar() {
-	const texto = document.querySelector("#creaFrase");
-	texto.value = "";
-	const autor = document.querySelector("#creaAutor");
-	autor.value = "";
-	const tema = document.querySelector("#creaTema");
-	tema.value = 0;
+	document.querySelector("#creaFrase").value = "";
+	document.querySelector("#creaFraseAlerta").innerHTML = "";
 
-	const modal = document.querySelector("#creaFraseModal");
-	modal.style.display = 'flex';
+	document.querySelector("#creaAutor").value = "";
+	document.querySelector("#creaAutorAlerta").innerHTML = "";
+
+	document.querySelector("#creaTema").value = 0;
+	document.querySelector("#creaTemaAlerta").innerHTML = "";
+
+	document.querySelector("#creaFraseModal").style.display = 'flex';
 }
 
+// Valida el contenido de los input
 function creaFraseValidar() {
+	const texto = document.querySelector("#creaFrase").value;
+	const autor = document.querySelector("#creaAutor").value;
+	const tema = document.querySelector("#creaTema").value;
+
+	let hasIssues = false;
+
+	const alertaFrase = document.querySelector("#creaFraseAlerta");
+	if (texto == "") {
+		alertaFrase.innerHTML = "El campo no puede estar vacío.";
+		hasIssues = true;
+	} else {
+		alertaFrase.innerHTML = "";
+	}
+
+	/* Autor es opcional, no hay validación
+	const alertaAutor = document.querySelector("#creaAutorAlerta");
+	if (autor == "") {
+		alertaAutor.innerHTML = "El campo no puede estar vacío.";
+		hasIssues = true;
+	} else {
+		alertaAutor.innerHTML = "";
+	}*/
+
+	const alertaTema = document.querySelector("#creaTemaAlerta");
+	if (tema == 0) {
+		alertaTema.innerHTML = "Debe selecciona una opción.";
+		hasIssues = true;
+	} else {
+		alertaTema.innerHTML = "";
+	}
+
+	// Si no hay errores procede a hacer solicitud a BD
+	if (!hasIssues)
+		creaFraseEnviar(texto, autor, tema);
+}
+
+// Envia la consulta de crear a BD
+function creaFraseEnviar(texto, autor, tema) {
 	cierraModal();
-}
+	document.querySelector("#esperaModal").style.display = 'flex';
 
+	db.collection("Frases").add({
+		frase: texto,
+		autor: autor,
+		id_tema: tema
+	})
+	.then((ref) => {
+		//Vuelva a llamar a recargar la tabla
+		mostrarFrases();
 
-function actualizaFraseMostrar(id) {
-	const item = listaFrasesGlobal.find(item => item.id == id);
-	
-	const texto = document.querySelector("#actualizaFrase");
-	texto.value = item.frase;
-	const autor = document.querySelector("#actualizaAutor");
-	autor.value = item.autor;
-	const tema = document.querySelector("#actualizaTema");
-	tema.value = item.tema;
-
-	const modal = document.querySelector("#actualizaFraseModal");
-	modal.style.display = 'flex';
-}
-
-function actualizaFraseValidar() {
-	cierraModal();
-}
-
-
-function eliminaFraseMostrar(id) {
-	const item = listaFrasesGlobal.find(item => item.id == id);
-	
-	const texto = document.querySelector("#eliminaFrase");
-	texto.innerHTML = '"'+item.frase+'"';
-
-	const modal = document.querySelector("#eliminaFraseModal");
-	modal.style.display = 'flex';
-}
-
-function eliminaFraseAccion() {
-	cierraModal();
-}
-
-
-function cierraModal() {
-	const modales = document.querySelectorAll(".modal");
-	modales.forEach(item => {
-		item.style.display = "none";
+		cierraModal();
+		document.querySelector("#resultadoModal").style.display = 'flex';
+	})
+	.catch((error) => {
+		cierraModal();
+		console.error("Error writing document: ", error);
 	});
 }
 
 
-/**Función para salir de la sesión y limpiar los datos almacenados */
-function cerrarSesion() {
+/*** FUNCIONES PARA ACTUALIZAR FRASE ***/
+// Vacía los input y muestra el modal
+function actualizaFraseMostrar(id) {
+	const item = listaFrasesGlobal.find(item => item.id == id);
+	fraseSeleccionadaId = id;
 	
-	sessionStorage.clear();
+	document.querySelector("#actualizaFrase").value = item.frase;
+	document.querySelector("#actualizaAutor").value = item.autor;
+	document.querySelector("#actualizaTema").value = item.id_tema;
+
+	document.querySelector("#actualizaFraseModal").style.display = 'flex';
+}
+
+// Valida el contenido de los input
+function actualizaFraseValidar() {
+	const frase = document.querySelector("#actualizaFrase").value;
+	const autor = document.querySelector("#actualizaAutor").value;
+	const tema = document.querySelector("#actualizaTema").value;
+
+	let hasIssues = false;
+
+	const alertaFrase = document.querySelector("#actualizaFraseAlerta");
+	if (frase == "") {
+		alertaFrase.innerHTML = "El campo no puede estar vacío.";
+		hasIssues = true;
+	} else {
+		alertaFrase.innerHTML = "";
+	}
+
+	const alertaTema = document.querySelector("#actualizaTemaAlerta");
+	if (tema == "") {
+		alertaTema.innerHTML = "Debe selecciona una opción.";
+		hasIssues = true;
+	} else {
+		alertaTema.innerHTML = "";
+	}
+
+	// Si no hay errores procede a hacer solicitud a BD
+	if (!hasIssues)
+		actualizaFraseEnviar(frase, autor, tema);
+}
+
+// Envia la consulta de actualizar a BD
+function actualizaFraseEnviar(frase, autor, tema) {
+	cierraModal();
+	document.querySelector("#esperaModal").style.display = 'flex';
+
+	db.collection("Frases").doc(temaSeleccionadoId).set({
+		frase: frase,
+		autor: autor,
+		id_tema: tema
+	})
+	.then((ref) => {
+		//Vuelva a llamar a recargar la tabla
+		mostrarFrases();
+
+		cierraModal();
+		document.querySelector("#resultadoModal").style.display = 'flex';
+	})
+	.catch((error) => {
+		cierraModal();
+		console.error("Error writing document: ", error);
+	});
+}
+
+/*** FUNCIONES PARA ELIMINAR TEMA ***/
+// Busca los datos del registro para mostrar modal de confirmación
+function eliminaFraseMostrar(id) {
+	const item = listaFrasesGlobal.find(item => item.id == id);
+	fraseSeleccionadaId = id;
 	
-	window.location.href = "index.html";
-	
+	document.querySelector("#eliminaFrase").innerHTML = '"'+item.frase+'"';
+
+	document.querySelector("#eliminaFraseModal").style.display = 'flex';
+}
+
+// Envia la consulta de actualizar a BD
+function eliminaFraseAccion() {
+	cierraModal();
+	document.querySelector("#esperaModal").style.display = 'flex';
+
+	db.collection("Frases").doc(fraseSeleccionadaId).delete()
+	.then((ref) => {
+		//Vuelva a llamar a recargar la tabla
+		mostrarFrases();
+
+		cierraModal();
+		document.querySelector("#resultadoModal").style.display = 'flex';
+	})
+	.catch((error) => {
+		cierraModal();
+		console.error("Error writing document: ", error);
+	});
 }

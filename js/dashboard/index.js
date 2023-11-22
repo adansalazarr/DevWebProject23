@@ -4,7 +4,7 @@
 
 // Consulta de usuario en BD
 function iniciarSesion(correo, contrasena) {
-    db.collection("administradores").where("correo", "==", correo).where("contrasena", "==", contrasena).get().then((querySnapshot) => {
+    db.collection("Administradores").where("correo", "==", correo).where("contrasena", "==", contrasena).get().then((querySnapshot) => {
 
 		//se encontró un administrador
 		if (querySnapshot.docs.length > 0) {

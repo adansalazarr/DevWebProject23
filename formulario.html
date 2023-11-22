@@ -30,7 +30,7 @@
 		<nav>
 			<div class="navbar-header">
 				<a href="./index.html">BeHappy</a>
-				<button id="menu-toggle" class="menu-icon">&#9776;</button>
+				<button type="button" class="menu-icon" onclick="toggleMenu()">&#9776;</button>
 			</div>
 			<ul id="menu" class="navbar-menu">
 				<li><a href="./formulario.html">Evaluarme</a></li>
@@ -67,8 +67,11 @@
 		<!--Codigo de plugin de Firebase-->
 		<script src="https://www.gstatic.com/firebasejs/10.6.0/firebase-app-compat.js"></script>
 		<script src="https://www.gstatic.com/firebasejs/10.6.0/firebase-firestore-compat.js"></script>
-		<script type="text/javascript" src="./js/setup.js"></script>
 
+		<!--Codigo reutilizable-->
+		<script type="text/javascript" src="./js/setup.js"></script>
+		<script type="text/javascript" src="./js/general.js"></script>
+		
 		<!--Codigo de página actual-->
 		<script type="text/javascript" src="js/formulario.js"></script>
 	</body>

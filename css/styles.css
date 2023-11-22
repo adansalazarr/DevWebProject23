@@ -20,7 +20,7 @@ input, textarea {
 
 /* Estilos para la barra de navegación */
 nav {
-    background-color: rgba(0, 0, 0, 0.6);
+    background-color: rgba(0, 0, 0, 0.8);
     color: white;
     position: fixed;
     top: 0;
@@ -66,33 +66,6 @@ nav {
     font-weight: 500;
     color: white;
     text-decoration: none;
-}
-
-@media screen and (max-width: 768px) {
-    .menu-icon {
-        display: block;
-    }
-    
-    .navbar-menu {
-        display: none;
-        flex-direction: column;
-        position: absolute;
-        top: 80px;
-        left: 0;
-        right: 0;
-        background-color: rgba(0, 0, 0, 0.6);
-        z-index: 1;
-    }
-
-    .navbar-menu li {
-        margin: 0;
-        padding: 10px 20px;
-        text-align: center;
-    }
-
-    .navbar-menu.active {
-        display: flex;
-    }
 }
 
 .section-4 {
@@ -148,6 +121,7 @@ button:hover, .boton:hover {
 	height:60px;
 	bottom:40px;
 	right:40px;
+    z-index: 100;
 	background-color:#4279AF;
 	color:#FFF;
 	border-radius:50px;
@@ -225,10 +199,13 @@ button:hover, .boton:hover {
 }
 
 .modal-panel input, .modal-panel textarea, .modal-panel select {
-	margin-bottom: 20px;
 	padding: 12px 10px;
 	border: 1px solid var(--color-medio-oscuro);
 	border-radius: 2px;
+}
+
+.modal-panel small {
+	margin-bottom: 18px;
 }
 
 .modal-panel button {
@@ -263,8 +240,75 @@ button.boton-red:hover {
     background-color: #cc0000;
 }
 
-@media screen and (max-width: 1060px) {
-    #sesionCorreo {
-        display: none;
+.dashboard-acciones {
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+}
+
+@media screen and (max-width: 800px) {
+    .menu-icon {
+        display: block;
     }
+    
+    .navbar-menu {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 104px;
+        left: 0;
+        right: 0;
+        background-color: rgba(0, 0, 0, 0.9);
+        z-index: 1;
+    }
+
+    .navbar-menu li {
+        margin: 0;
+        padding: 10px 20px;
+        text-align: center;
+    }
+
+    .navbar-menu.active {
+        display: flex;
+    }
+
+    #sesionCorreo {
+        margin-top: 30px;
+        font-size: 1.2rem;
+        text-align: center;
+    }
+
+    .navbar-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+
+        width: 100%;
+    }
+
+    .phone-button {
+        bottom: 30px;
+        right: 30px;
+    }
+
+    .contenedor-tabla {
+        overflow-x: scroll;
+    }
+
+    .dashboard-acciones {
+        display: none;
+        flex-direction: column-reverse;
+        align-items: center;
+        position: absolute;
+        top: 272px;
+        left: 0;
+        right: 0;
+        background-color: rgba(0, 0, 0, 0.9);
+        z-index: 1;
+    }
+
+    .dashboard-acciones button {
+        margin: 15px;
+    }
+
 }

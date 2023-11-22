@@ -50,3 +50,9 @@
 .formulario li {
 	list-style-type: none;
 }
+
+@media only screen and (max-width: 800px) {
+    .section-2 {
+        padding: 20px;
+    }
+}

@@ -60,3 +60,11 @@ body {
 .tabla-subfila {
 	background-color: var(--color-claro);
 }
+
+
+@media only screen and (max-width: 800px) {
+    .panel-dashboard {
+        margin: 20px;
+        padding: 20px;
+    }
+}

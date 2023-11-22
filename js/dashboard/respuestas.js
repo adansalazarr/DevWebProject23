@@ -1,9 +1,3 @@
-const usuario = sessionStorage.getItem("usuarioCorreo") ?? "";
-if (usuario == "") {
-	window.location.href = "../index.html";
-}
-const perfil = document.querySelector("#sesionCorreo");
-perfil.innerHTML = `Buen día! ${usuario}`;
 
 let listaRespuestasGlobal = [];
 
