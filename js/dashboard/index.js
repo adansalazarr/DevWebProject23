@@ -11,6 +11,7 @@ function iniciarSesion(correo, contrasena) {
 			const administrador = querySnapshot.docs[0];
 
 			sessionStorage.setItem("usuarioCorreo", administrador.data().correo);
+			sessionStorage.setItem("usuarioId", administrador.id);
 		
 			window.location.href = "dashboard.html";
 		} else {

@@ -1,19 +1,50 @@
+//id para operaciones del usuario
+const usuarioId = sessionStorage.getItem("usuarioId");
 
-document.querySelector("#correo").value = usuario;
+document.querySelector("#correo").value = sessionStorage.getItem("usuarioCorreo");
 
-/**Función para subir el nuevo correo electrónico a datos de acceso del usuario */
+validaSesion();
+
+// Al presionar el botón valida que el input no se encuentra vacío y es un correo
 function actualizarCorreo() {
 	const correo = document.querySelector("#correo").value;
 
 	if (verificarCorreo(correo)) {
-		actualizaSesion(correo);
+		actualizaUsuario(correo);
 	} else {
 		alert("El correo electrónico ingresado no es válido.");
 	}
 }
 
+// Envia el nuevo correo al servidor
+function actualizaUsuario(correo) {
+	cierraModal();
+	document.querySelector("#esperaModal").style.display = 'flex';
 
-/**Función para cambiar la contrasena del usuario */
+	db.collection("Administradores").doc(usuarioId).update({
+		correo: correo
+	})
+	.then((ref) => {
+		// Envia el nuevo correo a SessionStorage
+		actualizaSesion(correo);
+
+		cierraModal();
+		document.querySelector("#resultadoModal").style.display = 'flex';
+	})
+	.catch((error) => {
+		cierraModal();
+		console.error("Error writing document: ", error);
+	});
+}
+
+// Actualiza el almacenamiento local
+function actualizaSesion(correo) {
+	sessionStorage.setItem("usuarioCorreo", correo);
+	document.querySelector("#sesionCorreo").innerHTML = `Buen día! ${correo}`;
+}
+
+
+// Valida los input para actualizar la contraseña
 function actualizarContrasena() {
 	const actual = document.querySelector("#contrasenaActual").value;
 	const nueva = document.querySelector("#contrasenaNueva").value;
@@ -21,7 +52,7 @@ function actualizarContrasena() {
 	if (actual != "") {
 		if (nueva != "") {
 			if (actual != nueva) {
-				actualizaContrasena(actual, nueva);
+				validarContrasena(actual, nueva);
 			} else {
 				alert("La contraseña nueva no puede ser la misma que la actual.");
 			}
@@ -33,33 +64,47 @@ function actualizarContrasena() {
 	}
 }
 
-
-/**Envia el valor del correo a servidor (temporalmente solo hace cambio de localstorage) */
-function actualizaSesion(correo) {
-	sessionStorage.setItem("usuarioCorreo", correo);
-	perfil.innerHTML = `Hola ${sessionStorage.getItem("usuarioCorreo")??""}!`;
-
-	alert("El correo se ha actualizado correctamente.");
-}
-
-
-/**Función para salir de la sesión y limpiar los datos almacenados */
-function cerrarSesion() {
-	
-	localStorage.clear();
-	
-	window.location.href = "index.html";
-	
-}
-
-
 /**Envia los datos de actualización de contraseña a servidor*/
-function actualizaContrasena(actual, nueva) {
+function validarContrasena(actual, nueva) {
+	cierraModal();
+	document.querySelector("#esperaModal").style.display = 'flex';
+
+	db.collection("Administradores").doc(usuarioId).get()
+	.then((querySnapshot) => {
+		
+		if (querySnapshot.data().contrasena == actual) {
+			// La contraseña anterior coincide, procede a reemplazar
+			enviaContrasena(nueva);
+		} else {
+			cierraModal();
+			alert("La contraseña actual es incorrecta.");
+		}
+	})
+	.catch((error) => {
+		cierraModal();
+		console.error("Error writing document: ", error);
+	});
+}
+
+function enviaContrasena(nueva) {
+
 	document.querySelector("#contrasenaActual").value = "";
 	document.querySelector("#contrasenaNueva").value = "";
 
-	alert("La contraseña se ha actualizado correctamente.");
+	db.collection("Administradores").doc(usuarioId).update({
+		contrasena: nueva
+	})
+	.then((ref) => {
+		// Envia el nuevo correo a SessionStorage
+		actualizaSesion(correo);
 
+		cierraModal();
+		document.querySelector("#resultadoModal").style.display = 'flex';
+	})
+	.catch((error) => {
+		cierraModal();
+		console.error("Error writing document: ", error);
+	});
 }
 
 function verificarCorreo(correo) {

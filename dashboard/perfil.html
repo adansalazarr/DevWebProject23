@@ -67,6 +67,22 @@
 			
 		</div>
 
+		<div id="esperaModal" class="modal" style="display: none;">
+			<div class="modal-panel">
+				<h1>Procesando...</h1>
+	
+				<p>Se está procesando la solicitud al servidor</p>
+			</div>
+		</div>
+
+		<div id="resultadoModal" class="modal" style="display: none;">
+			<div class="modal-panel">
+				<h1>Resultado <button class="modal-cierre" onclick="cierraModal()">x</button></h1>
+	
+				<p>La solicitud se ha completado correctamente!</p>				
+			</div>
+		</div>
+
 		<!--Codigo de plugin de Firebase-->
 		<script src="https://www.gstatic.com/firebasejs/10.6.0/firebase-app-compat.js"></script>
 		<script src="https://www.gstatic.com/firebasejs/10.6.0/firebase-firestore-compat.js"></script>

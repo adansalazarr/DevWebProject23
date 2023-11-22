@@ -2,12 +2,13 @@
 
 // Valida que el usuario inició sesión como admin
 function validaSesion() {
-	const usuario = sessionStorage.getItem("usuarioCorreo") ?? "";
+	const usuario = sessionStorage.getItem("usuarioId") ?? "";
 	if (usuario == "") {
 		cerrarSesion();
+	} else {
+		const correo = sessionStorage.getItem("usuarioCorreo") ?? "";
+		document.querySelector("#sesionCorreo").innerHTML = `Buen día! ${correo}`;
 	}
-	const perfil = document.querySelector("#sesionCorreo");
-	perfil.innerHTML = `Buen día! ${usuario}`;
 }
 
 /**Función para salir de la sesión y limpiar los datos almacenados */
