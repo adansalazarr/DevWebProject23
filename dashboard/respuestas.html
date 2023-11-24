@@ -47,6 +47,21 @@
 
 				<div class="contenedor-tabla">
 					<table id="tablaRespuestas">
+						<thead>
+							<tr>
+								<th class="tabla-columna-comprime text-right">Id</th>
+								<th>Respuesta</th>
+								<th class="tabla-columna-comprime text-right">Valor</th>
+								<th class="tabla-columna-comprime text-center">Opciones</th>
+							<tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td colspan="4" class="text-center">
+									Buscando información...
+								</td>
+							</tr>
+						</tbody>
 					</table>
 				</div>
 			</div>
@@ -59,9 +74,11 @@
 	
 				<label for="creaRespuesta">Respuesta <span class="text-red">*</span></label>
 				<input type="text" id="creaRespuesta" placeholder="Escribe...">
+				<small id="creaRespuestaAlerta" class="text-red"></small>
 
 				<label for="creaValor">Valor <span class="text-red">*</span></label>
 				<input type="number" id="creaValor" class="txt-right" placeholder="Escribe...">
+				<small id="creaValorAlerta" class="text-red"></small>
 
 				<button type="button" onclick="creaRespuestaValidar()">Confirmar</button>
 				
@@ -74,9 +91,11 @@
 
 				<label for="actualizaRespuesta">Respuesta <span class="text-red">*</span></label>
 				<input type="text" id="actualizaRespuesta" placeholder="Escribe...">
+				<small id="creaValorAlerta" class="text-red"></small>
 
 				<label for="actualizaValor">Valor <span class="text-red">*</span></label>
 				<input type="text" id="actualizaValor" class="txt-right" placeholder="Escribe...">
+				<small id="creaValorAlerta" class="text-red"></small>
 	
 				<button type="button" onclick="actualizaRespuestaValidar()">Confirmar</button>
 				
@@ -93,6 +112,22 @@
 
 				<button type="button" class="boton boton-red" onclick="eliminaRespuestaAccion()">Confirmar</button>
 				
+			</div>
+		</div>
+
+		<div id="esperaModal" class="modal" style="display: none;">
+			<div class="modal-panel">
+				<h1>Procesando...</h1>
+	
+				<p>Se está procesando la solicitud al servidor</p>
+			</div>
+		</div>
+
+		<div id="resultadoModal" class="modal" style="display: none;">
+			<div class="modal-panel">
+				<h1>Resultado <button class="modal-cierre" onclick="cierraModal()">x</button></h1>
+	
+				<p>La solicitud se ha completado correctamente!</p>				
 			</div>
 		</div>
 

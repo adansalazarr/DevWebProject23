@@ -21,7 +21,7 @@ function obtenerTemas() {
     });
 }
 
-// Agrega temas a los elementos <select> de los formularios
+// Processa la lista de temas a un formato de filas para tabla HTML
 function procesarTemas(temasLista) {
 	// Encabezados de tabla
 	let tablaHTML = `
@@ -177,7 +177,7 @@ function actualizaTemaEnviar(tema) {
 	})
 	.catch((error) => {
 		cierraModal();
-		console.error("Error writing document: ", error);
+		console.error("Error agregando el documento: ", error);
 	});
 }
 
