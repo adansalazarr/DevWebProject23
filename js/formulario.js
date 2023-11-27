@@ -21,7 +21,7 @@ function obtenerPreguntas() {
 
 // Obtener vínculos entre preguntas y respuestas
 function obtenerVinculos() {
-	return db.collection("Preguntas_Respuestas").get().then((querySnapshot) => {
+	return db.collection("PreguntasRespuestas").get().then((querySnapshot) => {
 		const vinculosLista = [];
 		querySnapshot.forEach((doc) => {
 			const tmp = { ...doc.data() };
@@ -58,6 +58,10 @@ function vincularPreguntasRespuestas(preguntasLista, respuestasLista, vinculosLi
 	//agregar arreglo de respuestas a preguntas
 	preguntasLista.map(item => {
 		item.respuestas = vinculosLista.filter(res => res.id_pregunta == item.id);
+		
+		// Reordena las respuestas por valor 
+		item.respuestas.sort((item1, item2) => item1.valor - item2.valor);
+
 		return item;
 	})
 

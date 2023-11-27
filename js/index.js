@@ -23,7 +23,9 @@ function changeMotivationalText(frasesLista, indice) {
 	if (indice < frasesLista.length) {
 		const motivationalText = document.getElementById("motivational-text");
 
-		motivationalText.innerHTML = frasesLista[indice].frase + "<br />-" + frasesLista[indice].autor ?? "Anónimo";
+		const autor = frasesLista[indice].autor == "" ? "Anónimo" : frasesLista[indice].autor;
+
+		motivationalText.innerHTML = frasesLista[indice].frase + "<br />-" + autor;
 		indice = (indice + 1) % frasesLista.length;
 
 		// Espera unos segundos antes de mostrar la siguiente frase

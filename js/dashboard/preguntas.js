@@ -91,8 +91,6 @@ function procesarPreguntas(preguntasLista) {
 
 			// Datos de respuestas vinculadas
 			if (preguntaItem.respuestas.length > 0) {
-				// Reordena las respuestas por valor 
-				preguntaItem.respuestas.sort((item1, item2) => item1.valor - item2.valor);
 
 				//Agrega HTML de respuesta a la tabla de preguntas
 				preguntaItem.respuestas.forEach(respuestaItem => {
@@ -166,7 +164,13 @@ function mostrarPreguntas() {
 
 		// Agrega los vinculos de respuestas a cada pregunta correspondiente
 		preguntasLista.map(item => {
+
+			// Filtra las respuestas que corresponden a la pregunta actual
 			const respuestas = vinculosLista.filter(vi => vi.id_pregunta == item.id);
+
+			// Reordena las respuestas por valor 
+			respuestas.sort((item1, item2) => item1.valor - item2.valor);
+
 			item.respuestas = respuestas;
 			return item;
 		});
