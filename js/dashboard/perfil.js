@@ -24,17 +24,17 @@ function actualizaUsuario(correo) {
 	db.collection("Administradores").doc(usuarioId).update({
 		correo: correo
 	})
-	.then((ref) => {
-		// Envia el nuevo correo a SessionStorage
-		actualizaSesion(correo);
+		.then((ref) => {
+			// Envia el nuevo correo a SessionStorage
+			actualizaSesion(correo);
 
-		cierraModal();
-		document.querySelector("#resultadoModal").style.display = 'flex';
-	})
-	.catch((error) => {
-		cierraModal();
-		console.error("Error writing document: ", error);
-	});
+			cierraModal();
+			document.querySelector("#resultadoModal").style.display = 'flex';
+		})
+		.catch((error) => {
+			cierraModal();
+			console.error("Error writing document: ", error);
+		});
 }
 
 // Actualiza el almacenamiento local
@@ -70,20 +70,20 @@ function validarContrasena(actual, nueva) {
 	document.querySelector("#esperaModal").style.display = 'flex';
 
 	db.collection("Administradores").doc(usuarioId).get()
-	.then((querySnapshot) => {
-		
-		if (querySnapshot.data().contrasena == actual) {
-			// La contraseña anterior coincide, procede a reemplazar
-			enviaContrasena(nueva);
-		} else {
+		.then((querySnapshot) => {
+
+			if (querySnapshot.data().contrasena == actual) {
+				// La contraseña anterior coincide, procede a reemplazar
+				enviaContrasena(nueva);
+			} else {
+				cierraModal();
+				alert("La contraseña actual es incorrecta.");
+			}
+		})
+		.catch((error) => {
 			cierraModal();
-			alert("La contraseña actual es incorrecta.");
-		}
-	})
-	.catch((error) => {
-		cierraModal();
-		console.error("Error writing document: ", error);
-	});
+			console.error("Error writing document: ", error);
+		});
 }
 
 function enviaContrasena(nueva) {
@@ -94,17 +94,17 @@ function enviaContrasena(nueva) {
 	db.collection("Administradores").doc(usuarioId).update({
 		contrasena: nueva
 	})
-	.then((ref) => {
-		// Envia el nuevo correo a SessionStorage
-		actualizaSesion(correo);
+		.then((ref) => {
+			// Envia el nuevo correo a SessionStorage
+			actualizaSesion(correo);
 
-		cierraModal();
-		document.querySelector("#resultadoModal").style.display = 'flex';
-	})
-	.catch((error) => {
-		cierraModal();
-		console.error("Error writing document: ", error);
-	});
+			cierraModal();
+			document.querySelector("#resultadoModal").style.display = 'flex';
+		})
+		.catch((error) => {
+			cierraModal();
+			console.error("Error writing document: ", error);
+		});
 }
 
 function verificarCorreo(correo) {

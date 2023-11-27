@@ -1,157 +1,160 @@
 <!DOCTYPE html>
 <html lang="es-MX">
-	<head>
-		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>BeHappy | Dashboard Administrador</title>
 
-		<!--Configuraciones del Favicon-->
-		<link rel="apple-touch-icon" sizes="180x180" href="../favicon/apple-touch-icon.png">
-		<link rel="icon" type="image/png" sizes="32x32" href="../favicon/favicon-32x32.png">
-		<link rel="icon" type="image/png" sizes="16x16" href="../favicon/favicon-16x16.png">
-		<link rel="manifest" href="../favicon/site.webmanifest">
-		<link rel="mask-icon" href="../favicon/safari-pinned-tab.svg" color="#5bbad5">
-		<link rel="shortcut icon" href="../favicon/favicon.ico">
-		<meta name="msapplication-TileColor" content="#da532c">
-		<meta name="theme-color" content="#ffffff">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>BeHappy | Dashboard Administrador</title>
 
-		<!--Archivos de estilos CSS-->
-		<link rel="stylesheet" type="text/css" href="../css/styles.css">
-		<link rel="stylesheet" type="text/css" href="../css/dashboard/dashboard.css">
-	</head>
-	<body>
+	<!--Configuraciones del Favicon-->
+	<link rel="apple-touch-icon" sizes="180x180" href="../favicon/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="../favicon/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="../favicon/favicon-16x16.png">
+	<link rel="manifest" href="../favicon/site.webmanifest">
+	<link rel="mask-icon" href="../favicon/safari-pinned-tab.svg" color="#5bbad5">
+	<link rel="shortcut icon" href="../favicon/favicon.ico">
+	<meta name="msapplication-TileColor" content="#da532c">
+	<meta name="theme-color" content="#ffffff">
 
-		<nav>
-			<div class="navbar-header">
-				<a href="../index.html">BeHappy</a>
-				<button type="button" class="menu-icon" onclick="toggleMenu()">&#9776;</button>
-			</div>
-			<ul id="menu" class="navbar-menu">
-				<li><a href="preguntas.html">Preguntas</a></li>
-				<li><a href="respuestas.html">Respuestas</a></li>
-				<li><a href="temas.html">Temas</a></li>
-				<li><a href="dashboard.html">Frases</a></li>
-			</ul>
-			<div class="dashboard-acciones">
-				<button type="button" onclick="cerrarSesion()">Cerrar sesión</button>
-				<a href="perfil.html" id="sesionCorreo"></a>
-			</div>
-		</nav>
+	<!--Archivos de estilos CSS-->
+	<link rel="stylesheet" type="text/css" href="../css/styles.css">
+	<link rel="stylesheet" type="text/css" href="../css/dashboard/dashboard.css">
+</head>
 
-		<div class="contenedor">
-			
-			<div class="panel-dashboard">
-				<h1>Administrar Frases motivacionales</h1>
-				<p>Administra las frases que se presentan a los estudiantes cuando entran a la plataforma. Recuerda que el objetivo es inspiradoras, motivadoras o alegrar a nuestros alumnos!</p>
-				<p><button type="button" onclick="creaFraseMostrar()">Agregar nueva frase</button></p>
+<body>
 
-				<div class="contenedor-tabla">
-					<table id="tablaFrases">
-						<thead>
-							<tr>
-								<th class="tabla-columna-comprime">Id</th>
-								<th>Frase</th>
-								<th>Autor</th>
-								<th>Tema</th>
-								<th class="tabla-columna-comprime text-center">Opciones</th>
-							<tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td colspan="5" class="text-center">
-									Buscando información...
-								</td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
-			</div>
-			
+	<nav>
+		<div class="navbar-header">
+			<a href="../index.html">BeHappy</a>
+			<button type="button" class="menu-icon" onclick="toggleMenu()">&#9776;</button>
 		</div>
+		<ul id="menu" class="navbar-menu">
+			<li><a href="preguntas.html">Preguntas</a></li>
+			<li><a href="respuestas.html">Respuestas</a></li>
+			<li><a href="temas.html">Temas</a></li>
+			<li><a href="dashboard.html">Frases</a></li>
+		</ul>
+		<div class="dashboard-acciones">
+			<button type="button" onclick="cerrarSesion()">Cerrar sesión</button>
+			<a href="perfil.html" id="sesionCorreo"></a>
+		</div>
+	</nav>
 
-		<div id="creaFraseModal" class="modal" style="display: none;">
-			<div class="modal-panel">
-				<h1>Agregar frase <button class="modal-cierre" onclick="cierraModal()">x</button></h1>
-	
-				<label for="creaFrase">Frase <span class="text-red">*</span></label>
-				<textarea id="creaFrase" rows="3" placeholder="Escribe..."></textarea>
-				<small id="creaFraseAlerta" class="text-red"></small>
-	
-				<label for="creaAutor">Autor (opcional)</label>
-				<input type="text" id="creaAutor" placeholder="Escribe...">
-				<small id="creaAutorAlerta" class="text-red"></small>
+	<div class="contenedor">
 
-				<label for="creaTema">Tema <span class="text-red">*</span></label>
-				<select id="creaTema">
-				</select>
-				<small id="creaTemaAlerta" class="text-red"></small>
-	
-				<button type="button" onclick="creaFraseValidar()">Confirmar</button>
-				
+		<div class="panel-dashboard">
+			<h1>Administrar Frases motivacionales</h1>
+			<p>Administra las frases que se presentan a los estudiantes cuando entran a la plataforma. Recuerda que el
+				objetivo es inspiradoras, motivadoras o alegrar a nuestros alumnos!</p>
+			<p><button type="button" onclick="creaFraseMostrar()">Agregar nueva frase</button></p>
+
+			<div class="contenedor-tabla">
+				<table id="tablaFrases">
+					<thead>
+						<tr>
+							<th>Frase</th>
+							<th>Autor</th>
+							<th>Tema</th>
+							<th class="tabla-columna-comprime text-center">Opciones</th>
+						<tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td colspan="4" class="text-center">
+								Buscando información...
+							</td>
+						</tr>
+					</tbody>
+				</table>
 			</div>
 		</div>
 
-		<div id="actualizaFraseModal" class="modal" style="display: none;">
-			<div class="modal-panel">
-				<h1>Actualizar frase <button class="modal-cierre" onclick="cierraModal()">x</button></h1>
-	
-				<label for="actualizaFrase">Frase <span class="text-red">*</span></label>
-				<textarea id="actualizaFrase" rows="3" placeholder="Escribe..."></textarea>
-				<small id="actualizaFraseAlerta" class="text-red"></small>
-	
-				<label for="actualizaAutor">Autor (opcional)</label>
-				<input type="text" id="actualizaAutor" placeholder="Escribe...">
-				<small id="actualizaAutorAlerta" class="text-red"></small>
+	</div>
 
-				<label for="actualizaTema">Tema <span class="text-red">*</span></label>
-				<select id="actualizaTema">
-				</select>
-				<small id="actualizaTemaAlerta" class="text-red"></small>
-	
-				<button type="button" onclick="actualizaFraseValidar()">Confirmar</button>
-				
-			</div>
+	<div id="creaFraseModal" class="modal" style="display: none;">
+		<div class="modal-panel">
+			<h1>Agregar frase <button class="modal-cierre" onclick="cierraModal()">x</button></h1>
+
+			<label for="creaFrase">Frase <span class="text-red">*</span></label>
+			<textarea id="creaFrase" rows="3" placeholder="Escribe..."></textarea>
+			<small id="creaFraseAlerta" class="text-red"></small>
+
+			<label for="creaAutor">Autor (opcional)</label>
+			<input type="text" id="creaAutor" placeholder="Escribe...">
+			<small id="creaAutorAlerta" class="text-red"></small>
+
+			<label for="creaTema">Tema <span class="text-red">*</span></label>
+			<select id="creaTema">
+			</select>
+			<small id="creaTemaAlerta" class="text-red"></small>
+
+			<button type="button" onclick="creaFraseValidar()">Confirmar</button>
+
 		</div>
+	</div>
 
-		<div id="eliminaFraseModal" class="modal" style="display: none;">
-			<div class="modal-panel">
-				<h1>Eliminar frase <button class="modal-cierre" onclick="cierraModal()">x</button></h1>
-	
-				<p>¿Proceder a eliminar la frase seleccionada?</p>
+	<div id="actualizaFraseModal" class="modal" style="display: none;">
+		<div class="modal-panel">
+			<h1>Actualizar frase <button class="modal-cierre" onclick="cierraModal()">x</button></h1>
 
-				<p id="eliminaFrase"></p>
+			<label for="actualizaFrase">Frase <span class="text-red">*</span></label>
+			<textarea id="actualizaFrase" rows="3" placeholder="Escribe..."></textarea>
+			<small id="actualizaFraseAlerta" class="text-red"></small>
 
-				<button type="button" class="boton boton-red" onclick="eliminaFraseAccion()">Confirmar</button>
-				
-			</div>
+			<label for="actualizaAutor">Autor (opcional)</label>
+			<input type="text" id="actualizaAutor" placeholder="Escribe...">
+			<small id="actualizaAutorAlerta" class="text-red"></small>
+
+			<label for="actualizaTema">Tema <span class="text-red">*</span></label>
+			<select id="actualizaTema">
+			</select>
+			<small id="actualizaTemaAlerta" class="text-red"></small>
+
+			<button type="button" onclick="actualizaFraseValidar()">Confirmar</button>
+
 		</div>
+	</div>
 
-		<div id="esperaModal" class="modal" style="display: none;">
-			<div class="modal-panel">
-				<h1>Procesando...</h1>
-	
-				<p>Se está procesando la solicitud al servidor</p>
-			</div>
+	<div id="eliminaFraseModal" class="modal" style="display: none;">
+		<div class="modal-panel">
+			<h1>Eliminar frase <button class="modal-cierre" onclick="cierraModal()">x</button></h1>
+
+			<p>¿Proceder a eliminar la frase seleccionada?</p>
+
+			<p id="eliminaFrase"></p>
+
+			<button type="button" class="boton boton-red" onclick="eliminaFraseAccion()">Confirmar</button>
+
 		</div>
+	</div>
 
-		<div id="resultadoModal" class="modal" style="display: none;">
-			<div class="modal-panel">
-				<h1>Resultado <button class="modal-cierre" onclick="cierraModal()">x</button></h1>
-	
-				<p>La solicitud se ha completado correctamente!</p>				
-			</div>
+	<div id="esperaModal" class="modal" style="display: none;">
+		<div class="modal-panel">
+			<h1>Procesando...</h1>
+
+			<p>Se está procesando la solicitud al servidor</p>
 		</div>
+	</div>
 
-		<!--Codigo de plugin de Firebase-->
-		<script src="https://www.gstatic.com/firebasejs/10.6.0/firebase-app-compat.js"></script>
-		<script src="https://www.gstatic.com/firebasejs/10.6.0/firebase-firestore-compat.js"></script>
+	<div id="resultadoModal" class="modal" style="display: none;">
+		<div class="modal-panel">
+			<h1>Resultado <button class="modal-cierre" onclick="cierraModal()">x</button></h1>
 
-		<!--Codigo reutilizable-->
-		<script type="text/javascript" src="../js/setup.js"></script>
-		<script type="text/javascript" src="../js/general.js"></script>
-		
-		<!--Codigo de página actual-->
-		<script type="text/javascript" src="../js/dashboard/general.js"></script>
-		<script type="text/javascript" src="../js/dashboard/dashboard.js"></script>
-	</body>
+			<p>La solicitud se ha completado correctamente!</p>
+		</div>
+	</div>
+
+	<!--Codigo de plugin de Firebase-->
+	<script src="https://www.gstatic.com/firebasejs/10.6.0/firebase-app-compat.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/10.6.0/firebase-firestore-compat.js"></script>
+
+	<!--Codigo reutilizable-->
+	<script type="text/javascript" src="../js/setup.js"></script>
+	<script type="text/javascript" src="../js/general.js"></script>
+
+	<!--Codigo de página actual-->
+	<script type="text/javascript" src="../js/dashboard/general.js"></script>
+	<script type="text/javascript" src="../js/dashboard/dashboard.js"></script>
+</body>
+
 </html>

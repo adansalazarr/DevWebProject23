@@ -8,17 +8,17 @@ mostrarTemas();
 function obtenerTemas() {
 	const temasColeccion = db.collection("Temas");
 
-    return temasColeccion.get().then((querySnapshot) => {
-        const temasLista = [];
+	return temasColeccion.get().then((querySnapshot) => {
+		const temasLista = [];
 
 		querySnapshot.forEach((doc) => {
 			const tmp = { ...doc.data() };
 			tmp.id = doc.id;
-            temasLista.push(tmp);
-        });
+			temasLista.push(tmp);
+		});
 
 		return temasLista;
-    });
+	});
 }
 
 // Processa la lista de temas a un formato de filas para tabla HTML
@@ -27,7 +27,6 @@ function procesarTemas(temasLista) {
 	let tablaHTML = `
 		<thead>
 			<tr>
-				<th class="tabla-columna-comprime text-right">Id</th>
 				<th>Tema</th>
 				<th class="tabla-columna-comprime text-center">Opciones</th>
 			<tr>
@@ -39,7 +38,6 @@ function procesarTemas(temasLista) {
 		temasLista.forEach(temaItem => {
 			tablaHTML += `
 				<tr>
-					<td class="tabla-columna-comprime text-right">${temaItem.id}</td>
 					<td>${temaItem.tema}</td>
 					<td class="tabla-columna-comprime text-center">
 						<button type="button" onclick="actualizaTemaMostrar('${temaItem.id}')">Editar</button>
@@ -51,7 +49,7 @@ function procesarTemas(temasLista) {
 		// Arreglo de temas vacío, notificar en tabla
 		tablaHTML += `
 				<tr>
-					<td colspan="3" class="text-center">
+					<td colspan="2" class="text-center">
 						No se encontraron registros para temas
 					</td>
 				</tr>`;
@@ -73,9 +71,9 @@ function mostrarTemas() {
 
 		procesarTemas(temasLista);
 
-    }).catch(error => {
-        console.error("Error obteniendo documentos: ", error);
-    });	
+	}).catch(error => {
+		console.error("Error obteniendo documentos: ", error);
+	});
 }
 
 
@@ -115,17 +113,17 @@ function creaTemaEnviar(tema) {
 	db.collection("Temas").add({
 		tema: tema
 	})
-	.then((ref) => {
-		//Vuelva a llamar a recargar la tabla
-		mostrarTemas();
+		.then((ref) => {
+			//Vuelva a llamar a recargar la tabla
+			mostrarTemas();
 
-		cierraModal();
-		document.querySelector("#resultadoModal").style.display = 'flex';
-	})
-	.catch((error) => {
-		cierraModal();
-		console.error("Error writing document: ", error);
-	});
+			cierraModal();
+			document.querySelector("#resultadoModal").style.display = 'flex';
+		})
+		.catch((error) => {
+			cierraModal();
+			console.error("Error writing document: ", error);
+		});
 }
 
 
@@ -168,17 +166,17 @@ function actualizaTemaEnviar(tema) {
 	db.collection("Temas").doc(temaSeleccionadoId).set({
 		tema: tema
 	})
-	.then((ref) => {
-		//Vuelva a llamar a recargar la tabla
-		mostrarTemas();
+		.then((ref) => {
+			//Vuelva a llamar a recargar la tabla
+			mostrarTemas();
 
-		cierraModal();
-		document.querySelector("#resultadoModal").style.display = 'flex';
-	})
-	.catch((error) => {
-		cierraModal();
-		console.error("Error agregando el documento: ", error);
-	});
+			cierraModal();
+			document.querySelector("#resultadoModal").style.display = 'flex';
+		})
+		.catch((error) => {
+			cierraModal();
+			console.error("Error agregando el documento: ", error);
+		});
 }
 
 
@@ -187,8 +185,8 @@ function actualizaTemaEnviar(tema) {
 function eliminaTemaMostrar(id) {
 	const item = listaTemasGlobal.find(item => item.id == id);
 	temaSeleccionadoId = id;
-	
-	document.querySelector("#eliminaTema").innerHTML = '"'+item.tema+'"';
+
+	document.querySelector("#eliminaTema").innerHTML = '"' + item.tema + '"';
 
 	document.querySelector("#eliminaTemaModal").style.display = 'flex';
 }
@@ -199,15 +197,15 @@ function eliminaTemaAccion() {
 	document.querySelector("#esperaModal").style.display = 'flex';
 
 	db.collection("Temas").doc(temaSeleccionadoId).delete()
-	.then((ref) => {
-		//Vuelva a llamar a recargar la tabla
-		mostrarTemas();
+		.then((ref) => {
+			//Vuelva a llamar a recargar la tabla
+			mostrarTemas();
 
-		cierraModal();
-		document.querySelector("#resultadoModal").style.display = 'flex';
-	})
-	.catch((error) => {
-		cierraModal();
-		console.error("Error writing document: ", error);
-	});
+			cierraModal();
+			document.querySelector("#resultadoModal").style.display = 'flex';
+		})
+		.catch((error) => {
+			cierraModal();
+			console.error("Error writing document: ", error);
+		});
 }

@@ -9,17 +9,17 @@ mostrarRespuestas();
 function obtenerRespuestas() {
 	const respuestasColeccion = db.collection("Respuestas");
 
-    return respuestasColeccion.get().then((querySnapshot) => {
-        const respuestasLista = [];
+	return respuestasColeccion.orderBy("valor").get().then((querySnapshot) => {
+		const respuestasLista = [];
 
 		querySnapshot.forEach((doc) => {
 			const tmp = { ...doc.data() };
 			tmp.id = doc.id;
-            respuestasLista.push(tmp);
-        });
+			respuestasLista.push(tmp);
+		});
 
 		return respuestasLista;
-    });
+	});
 }
 
 // Processa la lista de respuestas a un formato de filas para tabla HTML
@@ -28,9 +28,8 @@ function procesarRespuestas(respuestasLista) {
 	let tablaHTML = `
 		<thead>
 			<tr>
-				<th class="tabla-columna-comprime text-right">Id</th>
-				<th>Respuesta</th>
 				<th class="tabla-columna-comprime text-right">Valor</th>
+				<th>Respuesta</th>
 				<th class="tabla-columna-comprime text-center">Opciones</th>
 			<tr>
 		</thead>
@@ -41,9 +40,8 @@ function procesarRespuestas(respuestasLista) {
 		respuestasLista.forEach(respuestaItem => {
 			tablaHTML += `
 				<tr>
-					<td class="tabla-columna-comprime text-right">${respuestaItem.id}</td>
-					<td>${respuestaItem.respuesta}</td>
 					<td class="tabla-columna-comprime text-right">${respuestaItem.valor}</td>
+					<td>${respuestaItem.respuesta}</td>
 					<td class="tabla-columna-comprime text-center">
 						<button type="button" onclick="actualizaRespuestaMostrar('${respuestaItem.id}')">Editar</button>
 						<button type="button" onclick="eliminaRespuestaMostrar('${respuestaItem.id}')" class="boton boton-red">Eliminar</button>
@@ -54,7 +52,7 @@ function procesarRespuestas(respuestasLista) {
 		// Arreglo de respuestas vacío, notificar en tabla
 		tablaHTML += `
 				<tr>
-					<td colspan="4" class="text-center">
+					<td colspan="3" class="text-center">
 						No se encontraron registros para respuestas
 					</td>
 				</tr>`;
@@ -76,9 +74,9 @@ function mostrarRespuestas() {
 
 		procesarRespuestas(respuestasLista);
 
-    }).catch(error => {
-        console.error("Error obteniendo documentos: ", error);
-    });	
+	}).catch(error => {
+		console.error("Error obteniendo documentos: ", error);
+	});
 }
 
 
@@ -86,8 +84,10 @@ function mostrarRespuestas() {
 // Vacía los input y muestra el modal
 function creaRespuestaMostrar() {
 	document.querySelector("#creaRespuesta").value = "";
-	document.querySelector("#creaValor").value = "";
 	document.querySelector("#creaRespuestaAlerta").innerHTML = "";
+
+	document.querySelector("#creaValor").value = "";
+	document.querySelector("#creaValorAlerta").innerHTML = "";
 
 	document.querySelector("#creaRespuestaModal").style.display = 'flex';
 }
@@ -129,17 +129,17 @@ function creaRespuestaEnviar(respuesta, valor) {
 		respuesta: respuesta,
 		valor: valor
 	})
-	.then((ref) => {
-		//Vuelva a llamar a recargar la tabla
-		mostrarRespuestas();
+		.then((ref) => {
+			//Vuelva a llamar a recargar la tabla
+			mostrarRespuestas();
 
-		cierraModal();
-		document.querySelector("#resultadoModal").style.display = 'flex';
-	})
-	.catch((error) => {
-		cierraModal();
-		console.error("Error agregando el documento: ", error);
-	});
+			cierraModal();
+			document.querySelector("#resultadoModal").style.display = 'flex';
+		})
+		.catch((error) => {
+			cierraModal();
+			console.error("Error agregando el documento: ", error);
+		});
 }
 
 
@@ -192,17 +192,17 @@ function actualizaRespuestaEnviar(respuesta, valor) {
 		respuesta: respuesta,
 		valor: valor
 	})
-	.then((ref) => {
-		//Vuelva a llamar a recargar la tabla
-		mostrarRespuestas();
+		.then((ref) => {
+			//Vuelva a llamar a recargar la tabla
+			mostrarRespuestas();
 
-		cierraModal();
-		document.querySelector("#resultadoModal").style.display = 'flex';
-	})
-	.catch((error) => {
-		cierraModal();
-		console.error("Error agregando el documento: ", error);
-	});
+			cierraModal();
+			document.querySelector("#resultadoModal").style.display = 'flex';
+		})
+		.catch((error) => {
+			cierraModal();
+			console.error("Error agregando el documento: ", error);
+		});
 }
 
 
@@ -211,8 +211,8 @@ function actualizaRespuestaEnviar(respuesta, valor) {
 function eliminaRespuestaMostrar(id) {
 	const item = listaRespuestasGlobal.find(item => item.id == id);
 	respuestaSeleccionadoId = id;
-	
-	document.querySelector("#eliminaRespuesta").innerHTML = '"'+item.respuesta+'"';
+
+	document.querySelector("#eliminaRespuesta").innerHTML = '"' + item.respuesta + '"';
 
 	document.querySelector("#eliminaRespuestaModal").style.display = 'flex';
 }
@@ -223,15 +223,15 @@ function eliminaRespuestaAccion() {
 	document.querySelector("#esperaModal").style.display = 'flex';
 
 	db.collection("Respuestas").doc(respuestaSeleccionadoId).delete()
-	.then((ref) => {
-		//Vuelva a llamar a recargar la tabla
-		mostrarRespuestas();
+		.then((ref) => {
+			//Vuelva a llamar a recargar la tabla
+			mostrarRespuestas();
 
-		cierraModal();
-		document.querySelector("#resultadoModal").style.display = 'flex';
-	})
-	.catch((error) => {
-		cierraModal();
-		console.error("Error writing document: ", error);
-	});
+			cierraModal();
+			document.querySelector("#resultadoModal").style.display = 'flex';
+		})
+		.catch((error) => {
+			cierraModal();
+			console.error("Error writing document: ", error);
+		});
 }

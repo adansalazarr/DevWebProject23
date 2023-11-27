@@ -39,17 +39,20 @@ body {
 	white-space: nowrap;
 }
 
-.panel-dashboard tr td, .panel-dashboard tr th {
+.panel-dashboard tr td,
+.panel-dashboard tr th {
 	padding: 6px;
 	border-right: 1px solid var(--color-oscuro);
 	border-bottom: 1px solid var(--color-oscuro);
 }
 
-.panel-dashboard tr th:last-child, .panel-dashboard tr td:last-child {
+.panel-dashboard tr th:last-child,
+.panel-dashboard tr td:last-child {
 	border-right: none;
 }
 
-.panel-dashboard tr:last-child th, .panel-dashboard tr:last-child td {
+.panel-dashboard tr:last-child th,
+.panel-dashboard tr:last-child td {
 	border-bottom: none;
 }
 
@@ -63,8 +66,8 @@ body {
 
 
 @media only screen and (max-width: 800px) {
-    .panel-dashboard {
-        margin: 20px;
-        padding: 20px;
-    }
+	.panel-dashboard {
+		margin: 20px;
+		padding: 20px;
+	}
 }

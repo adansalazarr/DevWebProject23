@@ -6,7 +6,7 @@ function prepararCorreo() {
 	const correo = document.querySelector("#correo").value;
 	const asunto = document.querySelector("#asunto").value;
 	const mensaje = document.querySelector("#mensaje").value;
-	
+
 	if (verificarCorreo(correo)) {
 		if (asunto != "") {
 			if (mensaje != "") {
@@ -24,7 +24,7 @@ function prepararCorreo() {
 
 
 function enviarCorreo(correo, asunto, mensaje) {
-	
+
 }
 
 

@@ -8,34 +8,34 @@ mostrarFrases();
 function obtenerFrases() {
 	const frasesColeccion = db.collection("Frases");
 
-    return frasesColeccion.get().then((querySnapshot) => {
-        const frasesLista = [];
+	return frasesColeccion.get().then((querySnapshot) => {
+		const frasesLista = [];
 
 		querySnapshot.forEach((doc) => {
 			const tmp = { ...doc.data() };
 			tmp.id = doc.id;
-            frasesLista.push(tmp);
-        });
+			frasesLista.push(tmp);
+		});
 
 		return frasesLista;
-    });
+	});
 }
 
 //Consulta a BD para obtener todos los temas
 function obtenerTemas() {
 	const temasColeccion = db.collection("Temas");
 
-    return temasColeccion.get().then((querySnapshot) => {
-        const temasLista = [];
+	return temasColeccion.get().then((querySnapshot) => {
+		const temasLista = [];
 
 		querySnapshot.forEach((doc) => {
 			const tmp = { ...doc.data() };
 			tmp.id = doc.id;
-            temasLista.push(tmp);
-        });
+			temasLista.push(tmp);
+		});
 
 		return temasLista;
-    });
+	});
 }
 
 // Agrega temas a los elementos <select> de los formularios
@@ -60,7 +60,6 @@ function procesarFrases(frasesLista) {
 	let tablaHTML = `
 		<thead>
 			<tr>
-				<th class="tabla-columna-comprime">Id</th>
 				<th>Frase</th>
 				<th>Autor</th>
 				<th>Tema</th>
@@ -72,14 +71,13 @@ function procesarFrases(frasesLista) {
 	if (frasesLista.length > 0) {
 		// Genera las filas de tabla con arreglo de frases
 		frasesLista.forEach(fraseItem => {
-			let autorFormat = fraseItem.autor??``;
+			let autorFormat = fraseItem.autor ?? ``;
 
 			if (autorFormat == "")
 				autorFormat = `Anónimo`;
 
 			tablaHTML += `
 				<tr>
-					<td class="tabla-columna-comprime">${fraseItem.id}</td>
 					<td>${fraseItem.frase}</td>
 					<td>${autorFormat}</td>
 					<td>${fraseItem.tema_nombre}</td>
@@ -93,7 +91,7 @@ function procesarFrases(frasesLista) {
 		// Arreglo de frases vacío, notificar en tabla
 		tablaHTML += `
 				<tr>
-					<td colspan="5" class="text-center">
+					<td colspan="4" class="text-center">
 						No se encontraron registros para frases motivacionales
 					</td>
 				</tr>`;
@@ -117,14 +115,15 @@ function mostrarFrases() {
 			fraseItem.tema_nombre = temasLista.find(item => fraseItem.id_tema == item.id).tema;
 		});
 
+		//Almacena la lista objetos mapeados para manejar de forma global
 		listaFrasesGlobal = frasesLista;
 		fraseSeleccionadaId = null;
 
-        procesarFrases(frasesLista);
+		procesarFrases(frasesLista);
 
-    }).catch(error => {
-        console.error("Error obteniendo documentos: ", error);
-    });	
+	}).catch(error => {
+		console.error("Error obteniendo documentos: ", error);
+	});
 }
 
 
@@ -191,17 +190,17 @@ function creaFraseEnviar(texto, autor, tema) {
 		autor: autor,
 		id_tema: tema
 	})
-	.then((ref) => {
-		//Vuelva a llamar a recargar la tabla
-		mostrarFrases();
+		.then((ref) => {
+			//Vuelva a llamar a recargar la tabla
+			mostrarFrases();
 
-		cierraModal();
-		document.querySelector("#resultadoModal").style.display = 'flex';
-	})
-	.catch((error) => {
-		cierraModal();
-		console.error("Error writing document: ", error);
-	});
+			cierraModal();
+			document.querySelector("#resultadoModal").style.display = 'flex';
+		})
+		.catch((error) => {
+			cierraModal();
+			console.error("Error writing document: ", error);
+		});
 }
 
 
@@ -210,7 +209,7 @@ function creaFraseEnviar(texto, autor, tema) {
 function actualizaFraseMostrar(id) {
 	const item = listaFrasesGlobal.find(item => item.id == id);
 	fraseSeleccionadaId = id;
-	
+
 	document.querySelector("#actualizaFrase").value = item.frase;
 	document.querySelector("#actualizaAutor").value = item.autor;
 	document.querySelector("#actualizaTema").value = item.id_tema;
@@ -257,17 +256,17 @@ function actualizaFraseEnviar(frase, autor, tema) {
 		autor: autor,
 		id_tema: tema
 	})
-	.then((ref) => {
-		//Vuelva a llamar a recargar la tabla
-		mostrarFrases();
+		.then((ref) => {
+			//Vuelva a llamar a recargar la tabla
+			mostrarFrases();
 
-		cierraModal();
-		document.querySelector("#resultadoModal").style.display = 'flex';
-	})
-	.catch((error) => {
-		cierraModal();
-		console.error("Error writing document: ", error);
-	});
+			cierraModal();
+			document.querySelector("#resultadoModal").style.display = 'flex';
+		})
+		.catch((error) => {
+			cierraModal();
+			console.error("Error writing document: ", error);
+		});
 }
 
 /*** FUNCIONES PARA ELIMINAR TEMA ***/
@@ -275,8 +274,8 @@ function actualizaFraseEnviar(frase, autor, tema) {
 function eliminaFraseMostrar(id) {
 	const item = listaFrasesGlobal.find(item => item.id == id);
 	fraseSeleccionadaId = id;
-	
-	document.querySelector("#eliminaFrase").innerHTML = '"'+item.frase+'"';
+
+	document.querySelector("#eliminaFrase").innerHTML = '"' + item.frase + '"';
 
 	document.querySelector("#eliminaFraseModal").style.display = 'flex';
 }
@@ -287,15 +286,15 @@ function eliminaFraseAccion() {
 	document.querySelector("#esperaModal").style.display = 'flex';
 
 	db.collection("Frases").doc(fraseSeleccionadaId).delete()
-	.then((ref) => {
-		//Vuelva a llamar a recargar la tabla
-		mostrarFrases();
+		.then((ref) => {
+			//Vuelva a llamar a recargar la tabla
+			mostrarFrases();
 
-		cierraModal();
-		document.querySelector("#resultadoModal").style.display = 'flex';
-	})
-	.catch((error) => {
-		cierraModal();
-		console.error("Error writing document: ", error);
-	});
+			cierraModal();
+			document.querySelector("#resultadoModal").style.display = 'flex';
+		})
+		.catch((error) => {
+			cierraModal();
+			console.error("Error writing document: ", error);
+		});
 }

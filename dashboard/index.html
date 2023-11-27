@@ -1,59 +1,61 @@
 <!DOCTYPE html>
 <html lang="es-MX">
-	<head>
-		<meta charset=UTF-8>
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>BeHappy | Iniciar Sesión</title>
 
-		<!--Configuraciones del Favicon-->
-		<link rel="apple-touch-icon" sizes="180x180" href="../favicon/apple-touch-icon.png">
-		<link rel="icon" type="image/png" sizes="32x32" href="../favicon/favicon-32x32.png">
-		<link rel="icon" type="image/png" sizes="16x16" href="../favicon/favicon-16x16.png">
-		<link rel="manifest" href="../favicon/site.webmanifest">
-		<link rel="mask-icon" href="../favicon/safari-pinned-tab.svg" color="#5bbad5">
-		<link rel="shortcut icon" href="../favicon/favicon.ico">
-		<meta name="msapplication-TileColor" content="#da532c">
-		<meta name="theme-color" content="#ffffff">
+<head>
+	<meta charset=UTF-8>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>BeHappy | Iniciar Sesión</title>
 
-		<!--Archivos de estilos CSS-->
-		<link rel="stylesheet" type="text/css" href="../css/styles.css">
-		<link rel="stylesheet" type="text/css" href="../css/dashboard/login.css">
+	<!--Configuraciones del Favicon-->
+	<link rel="apple-touch-icon" sizes="180x180" href="../favicon/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="../favicon/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="../favicon/favicon-16x16.png">
+	<link rel="manifest" href="../favicon/site.webmanifest">
+	<link rel="mask-icon" href="../favicon/safari-pinned-tab.svg" color="#5bbad5">
+	<link rel="shortcut icon" href="../favicon/favicon.ico">
+	<meta name="msapplication-TileColor" content="#da532c">
+	<meta name="theme-color" content="#ffffff">
 
-	</head>
-	<body>
+	<!--Archivos de estilos CSS-->
+	<link rel="stylesheet" type="text/css" href="../css/styles.css">
+	<link rel="stylesheet" type="text/css" href="../css/dashboard/login.css">
+</head>
 
-		<nav>
-            <div class="navbar-header">
-                <a href="../index.html">BeHappy</a>
-				<button type="button" class="menu-icon" onclick="toggleMenu()">&#9776;</button>
-            </div>
-        </nav>
+<body>
 
-		<div class="contenedor">
-			<div class="panel">
-	
-				<h1>Iniciar sesión</h1>
-	
-				<label for="correo">Correo electrónico</label>
-				<input type="email" id="correo" autofocus="true">
-	
-				<label for="contrasena">Contraseña</label>
-				<input type="password" id="contrasena">
-	
-				<button type="button" onclick="login()">Ingresar</button>
-				
-			</div>
+	<nav>
+		<div class="navbar-header">
+			<a href="../index.html">BeHappy</a>
+			<button type="button" class="menu-icon" onclick="toggleMenu()">&#9776;</button>
 		</div>
+	</nav>
 
-		<!--Codigo de plugin de Firebase-->
-		<script src="https://www.gstatic.com/firebasejs/10.6.0/firebase-app-compat.js"></script>
-		<script src="https://www.gstatic.com/firebasejs/10.6.0/firebase-firestore-compat.js"></script>
+	<div class="contenedor">
+		<div class="panel">
 
-		<!--Codigo reutilizable-->
-		<script type="text/javascript" src="../js/setup.js"></script>
-		<script type="text/javascript" src="../js/general.js"></script>
-		
-		<!--Codigo de página actual-->
-		<script type="text/javascript" src="../js/dashboard/index.js"></script>
-	</body>
+			<h1>Iniciar sesión</h1>
+
+			<label for="correo">Correo electrónico</label>
+			<input type="email" id="correo" autofocus="true">
+
+			<label for="contrasena">Contraseña</label>
+			<input type="password" id="contrasena">
+
+			<button type="button" onclick="login()">Ingresar</button>
+
+		</div>
+	</div>
+
+	<!--Codigo de plugin de Firebase-->
+	<script src="https://www.gstatic.com/firebasejs/10.6.0/firebase-app-compat.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/10.6.0/firebase-firestore-compat.js"></script>
+
+	<!--Codigo reutilizable-->
+	<script type="text/javascript" src="../js/setup.js"></script>
+	<script type="text/javascript" src="../js/general.js"></script>
+
+	<!--Codigo de página actual-->
+	<script type="text/javascript" src="../js/dashboard/index.js"></script>
+</body>
+
 </html>

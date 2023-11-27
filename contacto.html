@@ -1,76 +1,81 @@
 <!DOCTYPE html>
 <html lang="es-MX">
-	<head>
-		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>BeHappy | Evaluarme</title>
 
-		<!--Configuraciones del Favicon-->
-		<link rel="apple-touch-icon" sizes="180x180" href="./favicon/apple-touch-icon.png">
-		<link rel="icon" type="image/png" sizes="32x32" href="./favicon/favicon-32x32.png">
-		<link rel="icon" type="image/png" sizes="16x16" href="./favicon/favicon-16x16.png">
-		<link rel="manifest" href="./favicon/site.webmanifest">
-		<link rel="mask-icon" href="./favicon/safari-pinned-tab.svg" color="#5bbad5">
-		<link rel="shortcut icon" href="./favicon/favicon.ico">
-		<meta name="msapplication-TileColor" content="#da532c">
-		<meta name="theme-color" content="#ffffff">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>BeHappy | Evaluarme</title>
 
-		<!--Archivos de estilos CSS-->
-		<link rel="stylesheet" type="text/css" href="./css/styles.css">
-		<link rel="stylesheet" type="text/css" href="./css/contacto.css">
-		<link rel="stylesheet" type="text/css" href="./css/dashboard/dashboard.css">
-	</head>
-	<body>
-		        <!--Botón ayuda TEC-->
-				<a href="tel:8008139500" class="phone-button">
-					<div class="phone-icon"></div>
-				</a>
-				<nav>
-					<div class="navbar-header">
-						<a href="./index.html">BeHappy</a>
-						<button type="button" class="menu-icon" onclick="toggleMenu()">&#9776;</button>
-					</div>
-					<ul id="menu" class="navbar-menu">
-						<li><a href="./formulario.html">Evaluarme</a></li>
-						<li><a href="./contacto.html">Contacto profesional</a></li>
-						<li><a href="./dashboard/index.html">Iniciar sesión</a></li>
-					</ul>
-				</nav>
+	<!--Configuraciones del Favicon-->
+	<link rel="apple-touch-icon" sizes="180x180" href="./favicon/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="./favicon/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="./favicon/favicon-16x16.png">
+	<link rel="manifest" href="./favicon/site.webmanifest">
+	<link rel="mask-icon" href="./favicon/safari-pinned-tab.svg" color="#5bbad5">
+	<link rel="shortcut icon" href="./favicon/favicon.ico">
+	<meta name="msapplication-TileColor" content="#da532c">
+	<meta name="theme-color" content="#ffffff">
 
-		<div class="contenedor">
-				
-			<div class="panel-dashboard">
-				<section class="section-2">
-					<h1>Contacto profesional</h1>
-					<p>Si deseas realizar una cita personalizada con un profesional del área TQueremos, ingresa la información referente a tu caso y la redireccionaremos al contacto correspondiente.</p>
-					
-					<div class="contacto-formulario">
-						<label for="correo">Mi correo electrónico</label>
-						<input type="email" id="correo">
-						
-						<label for="asunto">Asunto</label>
-						<input type="text" id="asunto">
+	<!--Archivos de estilos CSS-->
+	<link rel="stylesheet" type="text/css" href="./css/styles.css">
+	<link rel="stylesheet" type="text/css" href="./css/contacto.css">
+	<link rel="stylesheet" type="text/css" href="./css/dashboard/dashboard.css">
+</head>
 
-						<label for="mensaje">Mensaje</label>
-						<textarea rows="4" id="mensaje"></textarea>
+<body>
+	<!--Botón ayuda TEC-->
+	<a href="tel:8008139500" class="phone-button">
+		<div class="phone-icon"></div>
+	</a>
+	<nav>
+		<div class="navbar-header">
+			<a href="./index.html">BeHappy</a>
+			<button type="button" class="menu-icon" onclick="toggleMenu()">&#9776;</button>
+		</div>
+		<ul id="menu" class="navbar-menu">
+			<li><a href="./formulario.html">Evaluarme</a></li>
+			<li><a href="./contacto.html">Contacto profesional</a></li>
+			<li><a href="./dashboard/index.html">Iniciar sesión</a></li>
+		</ul>
+	</nav>
 
-						<button onclick="prepararCorreo()" type="button">Enviar correo</button>
-					</div>
+	<div class="contenedor">
 
-				</section>
-			</div>
+		<div class="panel-dashboard">
+			<section class="section-2">
+				<h1>Contacto profesional</h1>
+				<p>Si deseas realizar una cita personalizada con un profesional del área TQueremos, ingresa la
+					información referente a tu caso y la redireccionaremos al contacto correspondiente.</p>
 
-			<section class="section-4">
-				<h2>Enlaces importantes</h2>
-				<div class="social-buttons">
-					<a href="https://tqueremos.tec.mx/es/lineatqueremos" class="boton" target="_blank">Línea de apoyo TQueremos</a>
+				<div class="contacto-formulario">
+					<label for="correo">Mi correo electrónico</label>
+					<input type="email" id="correo">
+
+					<label for="asunto">Asunto</label>
+					<input type="text" id="asunto">
+
+					<label for="mensaje">Mensaje</label>
+					<textarea rows="4" id="mensaje"></textarea>
+
+					<button onclick="prepararCorreo()" type="button">Enviar correo</button>
 				</div>
+
 			</section>
 		</div>
 
-		<!--Codigo reutilizable-->
-		<script type="text/javascript" src="./js/general.js"></script>
-			
-		<script type="text/javascript" src="js/contacto.js"></script>
-	</body>
+		<section class="section-4">
+			<h2>Enlaces importantes</h2>
+			<div class="social-buttons">
+				<a href="https://tqueremos.tec.mx/es/lineatqueremos" class="boton" target="_blank">Línea de apoyo
+					TQueremos</a>
+			</div>
+		</section>
+	</div>
+
+	<!--Codigo reutilizable-->
+	<script type="text/javascript" src="./js/general.js"></script>
+
+	<script type="text/javascript" src="js/contacto.js"></script>
+</body>
+
 </html>

@@ -1,196 +1,404 @@
-
 let listaPreguntasGlobal = [];
-let listaRespuestasGlobal = [];
-let listaVinculosGlobal = [];
+let preguntaSeleccionadoId = null;
+let vinculoSeleccionadoId = null;
 
-recibirPreguntas();
+validaSesion();
+mostrarPreguntas();
 
-/**Función para llenar la tabla de preguntas con datos */
-function recibirPreguntas() {
-	
-	let peticionPreguntas = new XMLHttpRequest();
-	peticionPreguntas.open('GET', "../jsons/preguntas.json", false);
-	peticionPreguntas.send(null);
-	listaPreguntasGlobal = JSON.parse(peticionPreguntas.responseText);
+//Consulta a BD para obtener todas las respuestas
+function obtenerPreguntas() {
+	const preguntasColeccion = db.collection("Preguntas");
 
-	let peticionRespuestas = new XMLHttpRequest();
-	peticionRespuestas.open('GET', "../jsons/respuestas.json", false);
-	peticionRespuestas.send(null);
-	listaRespuestasGlobal = JSON.parse(peticionRespuestas.responseText);
+	return preguntasColeccion.get().then((querySnapshot) => {
+		const preguntasLista = [];
 
-	/**Llenar los select de formularios con temas disponibles*/
-	let selectOpciones = `<option value="0">-Selecciona-</option>`;
+		querySnapshot.forEach((doc) => {
+			const tmp = { ...doc.data() };
+			tmp.id = doc.id;
+			preguntasLista.push(tmp);
+		});
 
-	listaRespuestasGlobal.forEach(item => {
-		selectOpciones += `<option value="${item.id}">${item.respuesta}</option>`;
+		return preguntasLista;
 	});
+}
 
-	const selectVinculaRespuesta = document.querySelector("#vinculaRespuesta");
-	selectVinculaRespuesta.innerHTML = selectOpciones;
+//Consulta a BD para obtener todas las respuestas
+function obtenerRespuestas() {
+	const respuestasColeccion = db.collection("Respuestas");
 
-	let peticionVinculos = new XMLHttpRequest();
-	peticionVinculos.open('GET', "../jsons/preguntas_respuestas.json", false);
-	peticionVinculos.send(null);
-	listaVinculosGlobal = JSON.parse(peticionVinculos.responseText);
+	return respuestasColeccion.orderBy("valor").get().then((querySnapshot) => {
+		const respuestasLista = [];
 
-	listaVinculosGlobal.map(respuesta => {
-		respuesta.pregunta = listaPreguntasGlobal.find(pre => pre.id == respuesta.id_pregunta).pregunta;
-		const res = listaRespuestasGlobal.find(res => res.id == respuesta.id_respuesta);
-		respuesta.respuesta = res.respuesta;
-		respuesta.valor = res.valor;
-		return respuesta;
+		querySnapshot.forEach((doc) => {
+			const tmp = { ...doc.data() };
+			tmp.id = doc.id;
+			respuestasLista.push(tmp);
+		});
+
+		return respuestasLista;
 	});
+}
 
+//Consulta a BD para obtener todas las respuestas
+function obtenerVinculos() {
+	const vinculosColeccion = db.collection("PreguntasRespuestas");
+
+	return vinculosColeccion.get().then((querySnapshot) => {
+		const vinculosLista = [];
+
+		querySnapshot.forEach((doc) => {
+			const tmp = { ...doc.data() };
+			tmp.id = doc.id;
+			vinculosLista.push(tmp);
+		});
+
+		return vinculosLista;
+	});
+}
+
+// Processa la lista de preguntas con sus respuestas vinculadas a un formato de filas para tabla HTML
+function procesarPreguntas(preguntasLista) {
+	// Encabezados de tabla
 	let tablaHTML = `
 		<thead>
 			<tr>
-				<th class="text-right">Id</th>
 				<th colspan="2">Pregunta</th>
-				<th class="text-center">Opciones</th>
+				<th class="tabla-columna-comprime text-center">Opciones</th>
 			<tr>
 		</thead>
 		<tbody>`;
 
-	listaPreguntasGlobal.forEach(item => {
+	if (preguntasLista.length > 0) {
+		// Genera las filas de tabla con arreglo de respuestas
+		preguntasLista.forEach((preguntaItem, index) => {
+
+			// Datos principales de la pregunta
+			tablaHTML += `
+				<tr>
+					<td colspan="2">${preguntaItem.pregunta}</td>
+					<td class="tabla-columna-comprime text-center">
+						<button type="button" onclick="actualizaPreguntaMostrar('${preguntaItem.id}')">Editar</button>
+						<button type="button" onclick="eliminaPreguntaMostrar('${preguntaItem.id}')" class="boton boton-red">Eliminar</button>
+					</td>
+				</tr>
+				<tr>
+					<th class="tabla-columna-comprime text-center">Valor</th>
+					<th class="text-left">Respuesta</th>
+					<th class="tabla-columna-comprime text-center">
+						<button type="button" onclick="vinculaRespuestaMostrar('${preguntaItem.id}')">Agregar respuesta</button>
+					</th>
+				</tr>`;
+
+			// Datos de respuestas vinculadas
+			if (preguntaItem.respuestas.length > 0) {
+				// Reordena las respuestas por valor 
+				preguntaItem.respuestas.sort((item1, item2) => item1.valor - item2.valor);
+
+				//Agrega HTML de respuesta a la tabla de preguntas
+				preguntaItem.respuestas.forEach(respuestaItem => {
+					tablaHTML += `
+						<tr>
+							<td class="tabla-columna-comprime text-center">${respuestaItem.valor}</td>
+							<td class="text-left">${respuestaItem.respuesta}</td>
+							<td class="tabla-columna-comprime text-center">
+								<button type="button" onclick="desvinculaRespuestaMostrar('${preguntaItem.id}', '${respuestaItem.id}')" class="boton boton-red">Eliminar</button>
+							</td>
+						</tr>`;
+				});
+			} else {
+				tablaHTML += `
+					<tr>
+						<td colspan="3" class="text-center">
+							No se encontraron respuestas vinculadas a la pregunta
+						</td>
+					</tr>`;
+			}
+
+			// Agrega espacio al final para separar las preguntas
+			if (index != (preguntasLista.length - 1)) {
+				tablaHTML += `
+					<tr>
+						<td colspan="3" class="text-center">
+							&nbsp;
+						</td>
+					</tr>`;
+			}
+		});
+
+	} else {
+		// Arreglo de respuestas vacío, notificar en tabla
 		tablaHTML += `
-			<tr>
-				<td class="text-right">${item.id}</td>
-				<td colspan="2">${item.pregunta}</td>
-				<td class="tabla-columna-comprime text-right">
-					<button type="button" onclick="actualizaPreguntaMostrar(${item.id})">Editar</button>
-					<button type="button" onclick="eliminaPreguntaMostrar(${item.id})" class="boton boton-red">Eliminar</button>
-				</td>
-			</tr>
-			<tr>
-				<td></td>
-				<th class="text-left">Respuesta</th>
-				<th class="text-left">Valor</th>
-				<td class="tabla-columna-comprime text-right">
-					<button type="button" onclick="vinculaRespuestaMostrar(${item.id})">Agregar respuesta</button>
-				</td>
-			</tr>`;
-		const respuestas = listaVinculosGlobal.filter(vinculo => vinculo.id_pregunta == item.id);
-
-		respuestas.forEach(res => {
-			tablaHTML += `
-			<tr>
-				<td></td>
-				<td>${res.respuesta}</td>
-				<td>${res.valor}</td>
-				<td class="tabla-columna-comprime text-right">
-					<button type="button" onclick="desvinculaRespuestaMostrar(${res.id_pregunta}, ${res.id_respuesta})" class="boton boton-red">Eliminar</button>
-				</td>
-			</tr>`;
-		})
-
-		if (listaPreguntasGlobal.indexOf(item) != listaPreguntasGlobal.length-1) {
-			tablaHTML += `
-			<tr>
-				<td colspan="4">&nbsp;</td>
-			</tr>`;
-		}
-
-	});
+				<tr>
+					<td colspan="3" class="text-center">
+						No se encontraron registros para preguntas
+					</td>
+				</tr>`;
+	}
 
 	tablaHTML += `</tbody>`;
 
+	// Actualizar HTML de la tabla
 	const tablaElemento = document.querySelector("#tablaPreguntas");
-
 	tablaElemento.innerHTML = tablaHTML;
 }
 
+// Solicita los datos necesarios a BD para actualizar el contenido de la página
+function mostrarPreguntas() {
+	Promise.all([obtenerPreguntas(), obtenerRespuestas(), obtenerVinculos()]).then(([preguntasLista, respuestasLista, vinculosLista]) => {
 
+		// Llena elementos <select> en formularios
+		let selectOpciones = `<option value="0">-Selecciona-</option>`;
+
+		respuestasLista.forEach(item => {
+			selectOpciones += `<option value="${item.id}">Valor: ${item.valor} | ${item.respuesta}</option>`;
+		});
+		document.querySelector("#vinculaRespuesta").innerHTML = selectOpciones;
+
+
+		// Mapeo de la lista de vinculos para que incluyan contenido de las respuestas
+		vinculosLista.map(item => {
+			const respuesta = respuestasLista.find(res => res.id == item.id_respuesta);
+			item.respuesta = respuesta.respuesta;
+			item.valor = respuesta.valor;
+
+			return item;
+		});
+
+		// Agrega los vinculos de respuestas a cada pregunta correspondiente
+		preguntasLista.map(item => {
+			const respuestas = vinculosLista.filter(vi => vi.id_pregunta == item.id);
+			item.respuestas = respuestas;
+			return item;
+		});
+
+		// Almacena la lista mapeada en la variable global para manejo en formularios
+		listaPreguntasGlobal = preguntasLista;
+		respuestaSeleccionadoId = null;
+		vinculoSeleccionadoId = null;
+
+		procesarPreguntas(preguntasLista);
+
+	}).catch(error => {
+		console.error("Error obteniendo documentos: ", error);
+	});
+}
+
+
+/*** FUNCIONES PARA CREAR PREGUNTA ***/
+// Vacía los input y muestra el modal
 function creaPreguntaMostrar() {
-	const texto = document.querySelector("#creaPregunta");
-	texto.value = "";
+	document.querySelector("#creaPregunta").value = "";
+	document.querySelector("#creaPreguntaAlerta").innerHTML = "";
 
-	const modal = document.querySelector("#creaPreguntaModal");
-	modal.style.display = 'flex';
+	document.querySelector("#creaPreguntaModal").style.display = 'flex';
 }
 
+// Valida el contenido de los input
 function creaPreguntaValidar() {
+	const pregunta = document.querySelector("#creaPregunta").value;
+
+	let hasIssues = false;
+
+	const alertaPregunta = document.querySelector("#creaPreguntaAlerta");
+	if (pregunta == "") {
+		alertaPregunta.innerHTML = "El campo no puede estar vacío.";
+		hasIssues = true;
+	} else {
+		alertaPregunta.innerHTML = "";
+	}
+
+	// Si no hay errores procede a hacer solicitud a BD
+	if (!hasIssues)
+		creaPreguntaEnviar(pregunta);
+}
+
+// Envia la consulta de crear a BD
+function creaPreguntaEnviar(pregunta) {
 	cierraModal();
+	document.querySelector("#esperaModal").style.display = 'flex';
+
+	db.collection("Preguntas").add({
+		pregunta: pregunta
+	})
+		.then((ref) => {
+			//Vuelva a llamar a recargar la tabla
+			mostrarPreguntas();
+
+			cierraModal();
+			document.querySelector("#resultadoModal").style.display = 'flex';
+		})
+		.catch((error) => {
+			cierraModal();
+			console.error("Error agregando el documento: ", error);
+		});
 }
 
 
+/*** FUNCIONES PARA ACTUALIZAR PREGUNTA ***/
+// Vacía los input y muestra el modal
 function actualizaPreguntaMostrar(id) {
 	const item = listaPreguntasGlobal.find(item => item.id == id);
-	
-	const texto = document.querySelector("#actualizaPregunta");
-	texto.value = item.pregunta;
+	preguntaSeleccionadoId = id;
 
-	const modal = document.querySelector("#actualizaPreguntaModal");
-	modal.style.display = 'flex';
+	document.querySelector("#actualizaPregunta").value = item.pregunta;
+	document.querySelector("#actualizaPreguntaAlerta").innerHTML = "";
+
+	document.querySelector("#actualizaPreguntaModal").style.display = 'flex';
 }
 
+// Valida el contenido de los input
 function actualizaPreguntaValidar() {
+	const pregunta = document.querySelector("#actualizaPregunta").value;
+
+	let hasIssues = false;
+
+	const alertaPregunta = document.querySelector("#actualizaPreguntataAlerta");
+	if (pregunta == "") {
+		alertaPregunta.innerHTML = "El campo no puede estar vacío.";
+		hasIssues = true;
+	} else {
+		alertaPregunta.innerHTML = "";
+	}
+
+	// Si no hay errores procede a hacer solicitud a BD
+	if (!hasIssues)
+		actualizaPreguntaEnviar(pregunta);
+}
+
+// Envia la consulta de actualizar a BD
+function actualizaPreguntaEnviar(pregunta) {
 	cierraModal();
+	document.querySelector("#esperaModal").style.display = 'flex';
+
+	db.collection("Preguntas").doc(preguntaSeleccionadoId).set({
+		pregunta: pregunta,
+	})
+		.then((ref) => {
+			//Vuelva a llamar a recargar la tabla
+			mostrarPreguntas();
+
+			cierraModal();
+			document.querySelector("#resultadoModal").style.display = 'flex';
+		})
+		.catch((error) => {
+			cierraModal();
+			console.error("Error agregando el documento: ", error);
+		});
 }
 
 
+/*** FUNCIONES PARA ELIMINAR PREGUNTAS ***/
+// Busca los datos del registro para mostrar modal de confirmación
 function eliminaPreguntaMostrar(id) {
-	const item = listaPreguntasGlobal.find(item => item.id == id);
-	
-	const texto = document.querySelector("#eliminaPregunta");
-	texto.innerHTML = '"'+item.pregunta+'"';
+	const pregunta = listaPreguntasGlobal.find(item => item.id == id);
+	preguntaSeleccionadoId = id;
 
-	const modal = document.querySelector("#eliminaPreguntaModal");
-	modal.style.display = 'flex';
+	document.querySelector("#eliminaPregunta").innerHTML = '"' + pregunta.pregunta + '"';
+
+	document.querySelector("#eliminaPreguntaModal").style.display = 'flex';
 }
 
+// Envia la consulta de actualizar a BD
 function eliminaPreguntaAccion() {
 	cierraModal();
+	document.querySelector("#esperaModal").style.display = 'flex';
+
+	db.collection("Preguntas").doc(preguntaSeleccionadoId).delete()
+		.then((ref) => {
+			//Vuelva a llamar a recargar la tabla
+			mostrarPreguntas();
+
+			cierraModal();
+			document.querySelector("#resultadoModal").style.display = 'flex';
+		})
+		.catch((error) => {
+			cierraModal();
+			console.error("Error writing document: ", error);
+		});
 }
 
 
+/*** FUNCIONES PARA VINCULAR RESPUESTA ***/
+// Vacía los input y muestra el modal
 function vinculaRespuestaMostrar(id) {
-	const item = listaPreguntasGlobal.find(item => item.id == id);
+	const pregunta = listaPreguntasGlobal.find(item => item.id == id);
+	preguntaSeleccionadoId = id;
 
-	const pregunta = document.querySelector("#vinculaPregunta");
-	pregunta.innerHTML = '"'+item.pregunta+'"';
+	document.querySelector("#vinculaPregunta").innerHTML = `"${pregunta.pregunta}"`;
 
-	const respuesta = document.querySelector("#vinculaRespuesta");
-	respuesta.value = 0;
+	document.querySelector("#vinculaRespuesta").value = 0;
+	document.querySelector("#vinculaRespuestaAlerta").innerHTML = "";
 
-	const modal = document.querySelector("#vinculaRespuestaModal");
-	modal.style.display = 'flex';
+	document.querySelector("#vinculaRespuestaModal").style.display = 'flex';
 }
 
+// Valida el contenido de los input
 function vinculaRespuestaValidar() {
+	const respuesta = document.querySelector("#vinculaRespuesta").value;
+
+	let hasIssues = false;
+
+	const alertaRespuesta = document.querySelector("#vinculaRespuestaAlerta");
+	if (respuesta == "0") {
+		alertaRespuesta.innerHTML = "Se debe seleccionar una opción.";
+		hasIssues = true;
+	} else {
+		alertaRespuesta.innerHTML = "";
+	}
+
+	// Si no hay errores procede a hacer solicitud a BD
+	if (!hasIssues)
+		vinculaRespuestaEnviar(respuesta);
+}
+
+// Envia la consulta de actualizar a BD
+function vinculaRespuestaEnviar(respuesta) {
 	cierraModal();
+	document.querySelector("#esperaModal").style.display = 'flex';
+
+	db.collection("PreguntasRespuestas").add({
+		id_pregunta: preguntaSeleccionadoId,
+		id_respuesta: respuesta
+	})
+		.then((ref) => {
+			//Vuelva a llamar a recargar la tabla
+			mostrarPreguntas();
+
+			cierraModal();
+			document.querySelector("#resultadoModal").style.display = 'flex';
+		})
+		.catch((error) => {
+			cierraModal();
+			console.error("Error agregando el documento: ", error);
+		});
 }
 
 
-function desvinculaRespuestaMostrar(idPregunta, idRespuesta) {
-	const item = listaVinculosGlobal.find(item => item.id_pregunta == idPregunta && item.id_respuesta == idRespuesta);
-	
-	const pregunta = document.querySelector("#desvinculaPregunta");
-	pregunta.innerHTML = '"'+item.pregunta+'"';
+/*** FUNCIONES PARA DESVINCULAR RESPUESTA ***/
+// Vacía los input y muestra el modal
+function desvinculaRespuestaMostrar(idPregunta, idVinculo) {
+	const pregunta = listaPreguntasGlobal.find(item => item.id_pregunta == idPregunta);
+	const vinculo = pregunta.respuestas.find(item => item.id == idVinculo);
+	vinculoSeleccionadoId = idVinculo;
 
-	const respuesta = document.querySelector("#desvinculaRespuesta");
-	respuesta.innerHTML = '"'+item.respuesta+'"';
-
-	const modal = document.querySelector("#desvinculaRespuestaModal");
-	modal.style.display = 'flex';
+	document.querySelector("#desvinculaPregunta").innerHTML = `"${pregunta.pregunta}"`;
+	document.querySelector("#desvinculaRespuesta").innerHTML = `"${vinculo.respuesta}"`;
 }
 
 function desvinculaRespuestaAccion() {
 	cierraModal();
-}
+	document.querySelector("#esperaModal").style.display = 'flex';
 
+	db.collection("PreguntasRespuestas").doc(vinculoSeleccionadoId).delete()
+		.then((ref) => {
+			//Vuelva a llamar a recargar la tabla
+			mostrarPreguntas();
 
-function cierraModal() {
-	const modales = document.querySelectorAll(".modal");
-	modales.forEach(item => {
-		item.style.display = "none";
-	});
-}
-
-/**Función para salir de la sesión y limpiar los datos almacenados */
-function cerrarSesion() {
-	
-	localStorage.clear();
-	
-	window.location.href = "index.html";
-	
+			cierraModal();
+			document.querySelector("#resultadoModal").style.display = 'flex';
+		})
+		.catch((error) => {
+			cierraModal();
+			console.error("Error agregando el documento: ", error);
+		});
 }

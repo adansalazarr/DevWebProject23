@@ -4,7 +4,7 @@
 
 // Consulta de usuario en BD
 function iniciarSesion(correo, contrasena) {
-    db.collection("Administradores").where("correo", "==", correo).where("contrasena", "==", contrasena).get().then((querySnapshot) => {
+	db.collection("Administradores").where("correo", "==", correo).where("contrasena", "==", contrasena).get().then((querySnapshot) => {
 
 		//se encontró un administrador
 		if (querySnapshot.docs.length > 0) {
@@ -12,12 +12,12 @@ function iniciarSesion(correo, contrasena) {
 
 			sessionStorage.setItem("usuarioCorreo", administrador.data().correo);
 			sessionStorage.setItem("usuarioId", administrador.id);
-		
+
 			window.location.href = "dashboard.html";
 		} else {
 			alert("El correo o contraseña es incorrecto.");
 		}
-    });
+	});
 }
 
 // Función que realizará login a base de datos

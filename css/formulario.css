@@ -1,26 +1,26 @@
 .section-1 {
-    height: 100vh;
-    background-image: url('../img/bg1.jpeg');
-    background-size: cover;
-    background-position: center;
-    color: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: xx-large;
+	height: 100vh;
+	background-image: url('../img/bg1.jpeg');
+	background-size: cover;
+	background-position: center;
+	color: white;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: xx-large;
 }
 
 .overlay {
-    background: rgba(0, 0, 0, 0.6);
-    padding: 20px;
-    text-align: center;
-    border-radius: 5px;
+	background: rgba(0, 0, 0, 0.6);
+	padding: 20px;
+	text-align: center;
+	border-radius: 5px;
 }
 
 .section-2 {
-    text-align: left;
+	text-align: left;
 	font-size: large;
-    padding: 20px 80px;
+	padding: 20px 80px;
 	line-height: 1.5;
 }
 
@@ -29,22 +29,22 @@
 }
 
 #question-container {
-    display: grid;
-    margin-top: 20px;
+	display: grid;
+	margin-top: 20px;
 }
 
 .section-4 {
-    padding: 50px 0;
+	padding: 50px 0;
 
 	color: white;
-    text-align: center;
-    background-color: var(--color-oscuro);
+	text-align: center;
+	background-color: var(--color-oscuro);
 }
 
 .social-buttons a {
-    display: inline-block;
-    margin: 10px;
-    text-decoration: none;
+	display: inline-block;
+	margin: 10px;
+	text-decoration: none;
 }
 
 .formulario li {
@@ -52,7 +52,7 @@
 }
 
 @media only screen and (max-width: 800px) {
-    .section-2 {
-        padding: 20px;
-    }
+	.section-2 {
+		padding: 20px;
+	}
 }

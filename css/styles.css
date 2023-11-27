@@ -1,192 +1,197 @@
-
 /*Variables para mantener esquema de colores*/
 html {
-    --color-oscuro: #0C1D2F;
-    --color-medio-oscuro: #2B688C;
-    --color-medio-claro: #4279AF;
-    --color-claro: #B1D0EE;
+	--color-oscuro: #0C1D2F;
+	--color-medio-oscuro: #2B688C;
+	--color-medio-claro: #4279AF;
+	--color-claro: #B1D0EE;
 }
 
 body {
-    margin: 0;
-    padding: 0;
-    font-family: Arial, sans-serif;
-    font-size: 14px;
+	margin: 0;
+	padding: 0;
+	font-family: Arial, sans-serif;
+	font-size: 14px;
 }
 
-input, textarea {
-    font-family: Arial, sans-serif;
+input,
+textarea {
+	font-family: Arial, sans-serif;
 }
 
 /* Estilos para la barra de navegación */
 nav {
-    background-color: rgba(0, 0, 0, 0.8);
-    color: white;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 80px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 12px 20px;
+	background-color: rgba(0, 0, 0, 0.8);
+	color: white;
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	height: 80px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 12px 20px;
 }
 
 .navbar-header a {
-    font-size: 1.5rem;
-    font-weight: 600;
-    color: white;
-    text-decoration: none;
+	font-size: 1.5rem;
+	font-weight: 600;
+	color: white;
+	text-decoration: none;
 }
 
 .menu-icon {
-    display: none;
-    font-size: 1.5rem;
-    color: white;
-    background: none;
-    border: none;
-    cursor: pointer;
+	display: none;
+	font-size: 1.5rem;
+	color: white;
+	background: none;
+	border: none;
+	cursor: pointer;
 }
 
 .navbar-menu {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	display: flex;
 }
 
 .navbar-menu li {
-    margin: 4px 10px;
-    padding: 4px 10px;
+	margin: 4px 10px;
+	padding: 4px 10px;
 }
 
 .navbar-menu a {
-    font-size: 1.2rem;
-    font-weight: 500;
-    color: white;
-    text-decoration: none;
+	font-size: 1.2rem;
+	font-weight: 500;
+	color: white;
+	text-decoration: none;
 }
 
 .section-4 {
-    background-color: var(--color-oscuro);
-    color: white;
-    text-align: center;
-    padding: 50px 0;
+	background-color: var(--color-oscuro);
+	color: white;
+	text-align: center;
+	padding: 50px 0;
 }
 
 .social-buttons a {
-    display: inline-block;
-    margin: 10px;
-    text-decoration: none;
+	display: inline-block;
+	margin: 10px;
+	text-decoration: none;
 }
 
 /*Estilo gneeral de los botones*/
-button, .boton {
-    padding: 10px 20px;
+button,
+.boton {
+	padding: 10px 20px;
 
-    font-weight: 600;
-    text-transform: uppercase;
-    text-decoration: none;
+	font-weight: 600;
+	text-transform: uppercase;
+	text-decoration: none;
 	color: white;
-    cursor: pointer;
+	cursor: pointer;
 
-    border-radius: 4px;
+	border-radius: 4px;
 	border: none;
 	background-color: var(--color-medio-claro);
 }
 
-button:hover, .boton:hover {
-    background-color: var(--color-medio-oscuro);
+button:hover,
+.boton:hover {
+	background-color: var(--color-medio-oscuro);
 }
 
 /**Alineación de textos*/
 .text-left {
-    text-align: left;
+	text-align: left;
 }
+
 .text-center {
-    text-align: center;
+	text-align: center;
 }
+
 .text-right {
-    text-align: right;
+	text-align: right;
 }
+
 .text-justify {
-    text-align: justify;
+	text-align: justify;
 }
 
 /* Estilo base para el botón de teléfono */
 .phone-button {
-	position:fixed;
-	width:60px;
-	height:60px;
-	bottom:40px;
-	right:40px;
-    z-index: 100;
-	background-color:#4279AF;
-	color:#FFF;
-	border-radius:50px;
+	position: fixed;
+	width: 60px;
+	height: 60px;
+	bottom: 40px;
+	right: 40px;
+	z-index: 100;
+	background-color: #4279AF;
+	color: #FFF;
+	border-radius: 50px;
 	box-shadow: 2px 2px 3px #999;
-    background-image: url('../img/phone.png'); 
-    background-repeat: no-repeat;
-    background-position: center;
+	background-image: url('../img/phone.png');
+	background-repeat: no-repeat;
+	background-position: center;
 }
 
 /* Cambia el cursor al puntero al pasar el ratón sobre el botón */
 .phone-button:hover {
-    cursor: pointer;
+	cursor: pointer;
 }
 
 /* iframe responsivo */
 .container {
-    position: relative;
-    overflow: hidden;
-    width: 100%;
-    padding-top: 56.25%;
-  }
+	position: relative;
+	overflow: hidden;
+	width: 100%;
+	padding-top: 56.25%;
+}
 
-  .responsive-iframe {
-    position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    width: 100%;
-    height: 100%;
-  }
+.responsive-iframe {
+	position: absolute;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	width: 100%;
+	height: 100%;
+}
 
 /* Estilo para el enlace con id="sesionCorreo" */
 #sesionCorreo {
-    color: white;
-    text-decoration: none;
-    margin-left: 10px;
-    font-weight: bold;
+	color: white;
+	text-decoration: none;
+	margin-left: 10px;
+	font-weight: bold;
 }
 
 .modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 1000;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 1000;
 
-    display: flex;
-    justify-content: center;
+	display: flex;
+	justify-content: center;
 
-    background-color: #000000CC;
+	background-color: #000000CC;
 }
 
 .modal-panel {
-    display: flex;
+	display: flex;
 	flex-direction: column;
 	justify-content: flex-start;
 
-	margin-top:60px;
+	margin-top: 60px;
 	padding: 20px 40px;
-    padding-bottom: 80px;
-    width: 50%;
-    max-width: 600px;
-    height: fit-content;
+	padding-bottom: 80px;
+	width: 50%;
+	max-width: 600px;
+	height: fit-content;
 
 	line-height: 1.5;
 	background-color: white;
@@ -198,7 +203,9 @@ button:hover, .boton:hover {
 	margin-bottom: 4px;
 }
 
-.modal-panel input, .modal-panel textarea, .modal-panel select {
+.modal-panel input,
+.modal-panel textarea,
+.modal-panel select {
 	padding: 12px 10px;
 	border: 1px solid var(--color-medio-oscuro);
 	border-radius: 2px;
@@ -218,97 +225,104 @@ button:hover, .boton:hover {
 }
 
 .modal-panel button.modal-cierre {
-    float: right;
+	float: right;
 	height: 24px;
-    width: 24px;
-    margin-top: 0;
-    padding: 0;
-    font-weight: 900;
-    color: var(--color-oscuro);
-    background-color: white;
+	width: 24px;
+	margin-top: 0;
+	padding: 0;
+	font-weight: 900;
+	color: var(--color-oscuro);
+	background-color: white;
 }
 
 .text-red {
-    color: red;
+	color: red;
 }
 
 button.boton-red {
-    background-color: red;
+	background-color: red;
 }
 
 button.boton-red:hover {
-    background-color: #cc0000;
+	background-color: #cc0000;
 }
 
 .dashboard-acciones {
-    display: flex;
-    flex-direction: row;
-    align-items: baseline;
+	display: flex;
+	flex-direction: row;
+	align-items: baseline;
 }
 
 @media screen and (max-width: 800px) {
-    .menu-icon {
-        display: block;
-    }
-    
-    .navbar-menu {
-        display: none;
-        flex-direction: column;
-        position: absolute;
-        top: 104px;
-        left: 0;
-        right: 0;
-        background-color: rgba(0, 0, 0, 0.9);
-        z-index: 1;
-    }
+	.menu-icon {
+		display: block;
+	}
 
-    .navbar-menu li {
-        margin: 0;
-        padding: 10px 20px;
-        text-align: center;
-    }
+	.navbar-menu {
+		display: none;
+		flex-direction: column;
+		position: absolute;
+		top: 104px;
+		left: 0;
+		right: 0;
+		background-color: rgba(0, 0, 0, 0.9);
+		z-index: 1;
+	}
 
-    .navbar-menu.active {
-        display: flex;
-    }
+	.navbar-menu li {
+		margin: 0;
+		padding: 10px 20px;
+		text-align: center;
+	}
 
-    #sesionCorreo {
-        margin-top: 30px;
-        font-size: 1.2rem;
-        text-align: center;
-    }
+	.navbar-menu.active {
+		display: flex;
+	}
 
-    .navbar-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: baseline;
+	#sesionCorreo {
+		margin-top: 30px;
+		font-size: 1.2rem;
+		text-align: center;
+	}
 
-        width: 100%;
-    }
+	.navbar-header {
+		display: flex;
+		justify-content: space-between;
+		align-items: baseline;
 
-    .phone-button {
-        bottom: 30px;
-        right: 30px;
-    }
+		width: 100%;
+	}
 
-    .contenedor-tabla {
-        overflow-x: scroll;
-    }
+	.phone-button {
+		bottom: 30px;
+		right: 30px;
+	}
 
-    .dashboard-acciones {
-        display: none;
-        flex-direction: column-reverse;
-        align-items: center;
-        position: absolute;
-        top: 272px;
-        left: 0;
-        right: 0;
-        background-color: rgba(0, 0, 0, 0.9);
-        z-index: 1;
-    }
+	.contenedor-tabla {
+		overflow-x: scroll;
+	}
 
-    .dashboard-acciones button {
-        margin: 15px;
-    }
+	.dashboard-acciones {
+		display: none;
+		flex-direction: column-reverse;
+		align-items: center;
+		position: absolute;
+		top: 272px;
+		left: 0;
+		right: 0;
+		background-color: rgba(0, 0, 0, 0.9);
+		z-index: 1;
+	}
+
+	.dashboard-acciones button {
+		margin: 15px;
+	}
+
+	.modal-panel {
+		width: 70%;
+		max-width: 90vw;
+		padding: 20px;
+		padding-bottom: 40px;
+	}
 
 }

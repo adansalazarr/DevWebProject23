@@ -1,8 +1,8 @@
 .perfil-formulario {
-    display: flex;
+	display: flex;
 	flex-direction: column;
-    justify-content: start;
-    align-items: stretch;
+	justify-content: start;
+	align-items: stretch;
 	max-width: 50%;
 	min-width: 300px;
 	margin-bottom: 30px;

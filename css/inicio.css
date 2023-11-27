@@ -1,44 +1,44 @@
 .section-1 {
-    height: 100vh;
-    background-image: url('../img/bg1.jpeg');
-    background-size: cover;
-    background-position: center;
-    color: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: xx-large;
+	height: 100vh;
+	background-image: url('../img/bg1.jpeg');
+	background-size: cover;
+	background-position: center;
+	color: white;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: xx-large;
 }
 
 .overlay {
-    background: rgba(0, 0, 0, 0.6);
-    padding: 20px;
-    text-align: center;
-    border-radius: 5px;
+	background: rgba(0, 0, 0, 0.6);
+	padding: 20px;
+	text-align: center;
+	border-radius: 5px;
 }
 
 .section-2 {
-    text-align: center;
-    padding: 50px 40% 50px 40%;
+	text-align: center;
+	padding: 50px 40% 50px 40%;
 }
 
 #question-container {
-    display:grid;
-    margin-top: 20px;
-    font-size: xx-large;
+	display: grid;
+	margin-top: 20px;
+	font-size: xx-large;
 }
 
 .section-3 {
-    background-color: #f2f2f2;
-    padding: 50px 20% 50px 20%;
-    text-align: center;
-    line-height : 35px;
-    font-size: x-large;
-    text-align: justify;
+	background-color: #f2f2f2;
+	padding: 50px 20% 50px 20%;
+	text-align: center;
+	line-height: 35px;
+	font-size: x-large;
+	text-align: justify;
 }
 
 @media only screen and (max-width: 800px) {
-    .section-3 {
-        padding: 30px;
-    }
+	.section-3 {
+		padding: 30px;
+	}
 }
